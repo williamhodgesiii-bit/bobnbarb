@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" color="#d8a652" role="img" aria-label="Bob and Barb's Barbecue crest">
+  <defs>
+    <linearGradient id="bbFlame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb347"/>
+      <stop offset="0.5" stop-color="#ff7a3d"/>
+      <stop offset="1" stop-color="#e2562b"/>
+    </linearGradient>
+    <path id="bbTop" d="M16 60 A44 44 0 0 1 104 60"/>
+    <path id="bbBot" d="M18 60 A42 42 0 0 0 102 60"/>
+  </defs>
+
+  <!-- rings -->
+  <circle cx="60" cy="60" r="57" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 4" opacity="0.7"/>
+
+  <!-- seal text -->
+  <g fill="currentColor" font-family="'Oswald', sans-serif" font-weight="600" letter-spacing="2.5">
+    <text font-size="10"><textPath href="#bbTop" startOffset="50%" text-anchor="middle">BOB &amp; BARB'S</textPath></text>
+    <text font-size="8"><textPath href="#bbBot" startOffset="50%" text-anchor="middle">TUPELO · MISSISSIPPI</textPath></text>
+  </g>
+
+  <!-- side stars -->
+  <text x="12" y="64" font-size="9" fill="currentColor" text-anchor="middle">✦</text>
+  <text x="108" y="64" font-size="9" fill="currentColor" text-anchor="middle">✦</text>
+
+  <!-- flame -->
+  <path d="M60 30 C49 46 43 52 43 64 a17 17 0 0 0 34 0 c0-10-6-15-10-23 c-2 8-8 8-8 0 c0-6 1-8 1-11 Z" fill="url(#bbFlame)"/>
+  <path d="M60 52 C54 60 52 63 52 68 a8 8 0 0 0 16 0 c0-5-4-7-6-12 c-1 5-4 4-4-0 Z" fill="#fff3d6" opacity="0.85"/>
+</svg>

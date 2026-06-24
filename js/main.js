@@ -84,6 +84,15 @@
     { emoji: '🍌', cap: "Barb's banana puddin'",  ar: '0.95',img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=70' },
   ];
 
+  const FAQ = [
+    { q: 'Do you take reservations for regular lunch & dinner?', a: 'Nope — the daytime Pit is first-come, first-served. Reservations are just for our Supper Club nights. Walk on in, grab a tray, and find a seat.' },
+    { q: 'What time do you sell out?', a: 'When the meat\'s gone, it\'s gone — brisket and ribs usually go first, sometimes by mid-afternoon on weekends. Come early if your heart\'s set on a specific cut.' },
+    { q: 'What exactly is the Supper Club?', a: 'A handful of nights a season we transform the dining room: candlelight, vinyl, white tablecloths, and a five-course chef\'s tasting menu. One seating, reservations only, and seats go fast. Check the calendar above.' },
+    { q: 'Do you cater? Can you do a whole hog?', a: 'We sure do — drop-off trays, on-site live-fire service, and whole-hog roasts with about a week\'s notice. Hit the Catering section to request a quote.' },
+    { q: 'Any vegetarian options?', a: 'Plenty of folks make a meal of our sides — smoked mac, cornbread, slaw, tater salad, collards, beans. Just ask and we\'ll steer you right.' },
+    { q: 'Where do I park downtown?', a: 'Street parking runs along Main, with a public lot a block over. Catering and big pickups can use the loading spot out back — just give us a ring.' },
+  ];
+
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -304,6 +313,37 @@
     if (e.key === 'Escape') closeLb();
     if (e.key === 'ArrowRight') openLb(lbIndex + 1);
     if (e.key === 'ArrowLeft') openLb(lbIndex - 1);
+  });
+
+  /* ---------------------------------------------------------
+     6b. FAQ ACCORDION
+     --------------------------------------------------------- */
+  const faqList = $('#faqList');
+  faqList.innerHTML = FAQ.map((f, i) => `
+    <div class="faq__item">
+      <button class="faq__q" aria-expanded="false" aria-controls="faqa${i}">
+        ${f.q}<span class="faq__icon" aria-hidden="true">+</span>
+      </button>
+      <div class="faq__a" id="faqa${i}" role="region"><div class="faq__a-inner">${f.a}</div></div>
+    </div>`).join('');
+
+  faqList.addEventListener('click', (e) => {
+    const btn = e.target.closest('.faq__q');
+    if (!btn) return;
+    const item = btn.parentElement;
+    const panel = item.querySelector('.faq__a');
+    const open = item.classList.contains('is-open');
+    // close siblings (classic accordion)
+    $$('.faq__item', faqList).forEach(it => {
+      it.classList.remove('is-open');
+      it.querySelector('.faq__a').style.maxHeight = '';
+      it.querySelector('.faq__q').setAttribute('aria-expanded', 'false');
+    });
+    if (!open) {
+      item.classList.add('is-open');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
   });
 
   /* ---------------------------------------------------------

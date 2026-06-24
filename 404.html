@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost in the Smoke — Bob &amp; Barb's</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;600&family=Playfair+Display:wght@700;900&family=Yellowtail&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <style>
+    :root { --char:#16100d; --flame:#ff7a3d; --ember:#e2562b; --gold:#d8a652; --cream:#f6ece0; }
+    * { margin:0; box-sizing:border-box; }
+    body {
+      min-height:100svh; display:grid; place-items:center; text-align:center; padding:2rem;
+      font-family:'Inter',system-ui,sans-serif; color:var(--cream);
+      background:radial-gradient(120% 120% at 50% 0%, #3a241a 0%, #1c120d 55%, #120b07 100%);
+    }
+    .logo { width:120px; margin:0 auto 1.6rem; filter:drop-shadow(0 8px 24px rgba(226,86,43,.45)); }
+    .code { font-family:'Bebas Neue',sans-serif; font-size:clamp(5rem,22vw,11rem); line-height:.9;
+      background:linear-gradient(90deg,var(--flame),var(--gold)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    h1 { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,5vw,2.6rem); margin:.4rem 0 1rem; }
+    h1 em { font-family:'Yellowtail',cursive; font-style:normal; color:var(--gold); }
+    p { color:rgba(246,236,224,.7); max-width:42ch; margin:0 auto 2rem; }
+    a.btn {
+      display:inline-flex; align-items:center; gap:.5rem; font-family:'Oswald',sans-serif; text-transform:uppercase;
+      letter-spacing:.12em; font-size:.86rem; padding:.95rem 1.8rem; border-radius:100px; text-decoration:none; color:#fff;
+      background:linear-gradient(135deg,var(--flame),#b8401d); transition:transform .3s, box-shadow .3s;
+    }
+    a.btn:hover { transform:translateY(-3px); box-shadow:0 14px 30px -12px rgba(226,86,43,.6); }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="logo" src="assets/logo.svg" alt="Bob and Barb's crest" />
+    <div class="code">404</div>
+    <h1>Looks like this one <em>went up in smoke</em></h1>
+    <p>The page you're after isn't on the pit. Let's get you back to the good stuff.</p>
+    <a class="btn" href="/">Back to the Pit</a>
+  </main>
+</body>
+</html>

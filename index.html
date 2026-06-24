@@ -6,16 +6,49 @@
   <title>Bob &amp; Barb's &mdash; Barbecue &amp; Supper Club · Downtown Tupelo, MS</title>
   <meta name="description" content="Low-and-slow Mississippi barbecue by day, a swanky reservation-only supper club by night. Bob &amp; Barb's is smokin' again in downtown Tupelo." />
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="Bob &amp; Barb's — Barbecue &amp; Supper Club" />
   <meta property="og:description" content="Pit-smoked all day. Candlelit on weekend nights. Downtown Tupelo, Mississippi." />
   <meta property="og:type" content="restaurant" />
+  <meta property="og:image" content="assets/logo.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#16100d" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Rye&family=Yellowtail&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🔥</text></svg>" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/logo.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <!-- Structured data: helps Google show hours, location & menu -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BarOrPub",
+    "name": "Bob & Barb's Barbecue & Supper Club",
+    "servesCuisine": ["Barbecue", "Southern", "American"],
+    "priceRange": "$$",
+    "telephone": "+1-662-555-0123",
+    "email": "howdy@bobandbarbs.com",
+    "url": "https://bobandbarbs.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Main Street",
+      "addressLocality": "Tupelo",
+      "addressRegion": "MS",
+      "postalCode": "38804",
+      "addressCountry": "US"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday"], "opens": "11:00", "closes": "20:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "11:00", "closes": "21:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "11:00", "closes": "15:00" }
+    ],
+    "acceptsReservations": "True"
+  }
+  </script>
 </head>
 <body class="is-day">
 
@@ -25,8 +58,11 @@
   <!-- ============ NAV ============ -->
   <header class="nav" id="nav">
     <a href="#top" class="nav__brand" aria-label="Bob and Barb's home">
-      <span class="nav__brand-script">Bob &amp; Barb's</span>
-      <span class="nav__brand-sub">BBQ · TUPELO</span>
+      <img src="assets/logo.svg" alt="" class="nav__brand-mark" width="40" height="40" />
+      <span class="nav__brand-text">
+        <span class="nav__brand-script">Bob &amp; Barb's</span>
+        <span class="nav__brand-sub">BBQ · TUPELO</span>
+      </span>
     </a>
 
     <nav class="nav__links" id="navLinks" aria-label="Primary">
@@ -59,7 +95,8 @@
     <div class="hero__smoke" aria-hidden="true"></div>
 
     <div class="hero__inner">
-      <p class="hero__eyebrow reveal">Est. in smoke. Reborn in Tupelo.</p>
+      <img src="assets/logo.svg" alt="Bob and Barb's crest" class="hero__crest reveal" width="120" height="120" />
+      <p class="hero__eyebrow reveal" data-delay="1">Est. in smoke. Reborn in Tupelo.</p>
       <h1 class="hero__title">
         <span class="hero__title-script reveal">Bob &amp; Barb's</span>
         <span class="hero__title-slab reveal" data-delay="1">Barbecue &amp; Supper Club</span>
@@ -299,6 +336,40 @@
     </div>
   </section>
 
+  <!-- ============ CATERING ============ -->
+  <section class="catering section" id="catering">
+    <div class="catering__inner reveal">
+      <div class="catering__copy">
+        <p class="kicker kicker--gold">Feed the Whole Crew</p>
+        <h2>Catering &amp; <em>Whole Hog</em></h2>
+        <p class="section__lede">
+          Weddings, tailgates, church socials, company throw-downs &mdash; we'll
+          bring the pit to you, or load you up by the pound. Whole-hog roasts
+          with a week's notice. Nobody leaves hungry.
+        </p>
+        <div class="catering__cta">
+          <a href="mailto:howdy@bobandbarbs.com?subject=Catering%20Inquiry" class="btn btn--ember">Request a Quote</a>
+          <a href="tel:+16625550123" class="btn btn--ghost btn--on-dark">Call the Pit</a>
+        </div>
+      </div>
+      <ul class="catering__list">
+        <li><span>🍖</span> Drop-off trays &amp; box lunches</li>
+        <li><span>🔥</span> On-site pit &amp; live-fire service</li>
+        <li><span>🐖</span> Whole-hog roasts (7 days' notice)</li>
+        <li><span>🥧</span> Dessert &amp; sweet-tea bars</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq section" id="faq">
+    <div class="section__head">
+      <p class="kicker reveal">Good Questions</p>
+      <h2 class="reveal">Before You Come</h2>
+    </div>
+    <div class="faq__list reveal" id="faqList"><!-- JS injects --></div>
+  </section>
+
   <!-- ============ VISIT / CONTACT ============ -->
   <section class="visit section" id="visit">
     <div class="section__head">
@@ -369,6 +440,8 @@
         <a href="#menu">Menu</a>
         <a href="#order">Order</a>
         <a href="#reserve">Supper Club</a>
+        <a href="#catering">Catering</a>
+        <a href="#faq">FAQ</a>
         <a href="#visit">Visit</a>
       </nav>
     </div>

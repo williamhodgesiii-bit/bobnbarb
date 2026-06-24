@@ -1,0 +1,12 @@
+{
+  "name": "Bob & Barb's — Barbecue & Supper Club",
+  "short_name": "Bob & Barb's",
+  "description": "Low-and-slow Mississippi barbecue by day, a candlelit supper club by night. Downtown Tupelo.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#16100d",
+  "theme_color": "#16100d",
+  "icons": [
+    { "src": "assets/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
