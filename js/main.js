@@ -112,6 +112,104 @@
     { q: 'Where do I park downtown?', a: 'Street parking runs along Main, with a public lot a block over. Catering and big pickups can use the loading spot out back — just give us a ring.' },
   ];
 
+  /* =========================================================
+     THE SUPPER CLUB (night) — a completely different restaurant.
+     Different menu, different gallery, different story & FAQ.
+     ========================================================= */
+  const SUPPER_MENU = {
+    tasting: [
+      { e: '✦', n: 'The Seven-Course Tasting', p: '$185', d: 'A journey through the season — caviar to confection, composed nightly by the chef.', t: 'Per guest', s: true },
+      { e: '✦', n: 'With Cellar Pairing',       p: '$310', d: 'Each course met, glass for glass, by a pour from our reserve list.', t: 'Per guest', s: true },
+      { e: '✦', n: "The Chef's Counter",        p: 'By request', d: 'Eight seats at the pass — the full tasting, narrated course by course.', t: '8 seats', s: true },
+    ],
+    caviar: [
+      { e: '◆', n: 'Ossetra Caviar Service', p: '30g · 50g', d: 'Royal ossetra, warm blini, crème fraîche, the traditional garnish.', t: 'For the table', s: true },
+      { e: '◆', n: 'Gulf Oysters',           p: '½ · Dozen', d: 'Champagne mignonette, finger lime, cucumber ice.', s: true },
+      { e: '◆', n: 'A5 Wagyu Tartare',       p: 'Market',    d: 'Hand-cut Texas wagyu, smoked yolk, black truffle, sourdough crisp.', s: true },
+      { e: '◆', n: 'Hamachi Crudo',          p: '',          d: 'Yuzu kosho, avocado, charred jalapeño oil.', s: true },
+    ],
+    first: [
+      { e: '✦', n: 'Foie Gras Torchon',         p: '', d: 'Sorghum gelée, toasted brioche, Hill Country pecans.', s: true },
+      { e: '✦', n: 'Lobster Bisque',            p: '', d: 'Cognac, tarragon crème, brandy-poached claw.', s: true },
+      { e: '✦', n: 'Heritage Tomato & Burrata', p: '', d: 'Aged balsamic, basil, Maldon salt, cold-pressed oil.', s: true },
+      { e: '✦', n: 'Roasted Beet & Chèvre',     p: '', d: 'Local honey, candied walnut, micro herbs.', s: true },
+    ],
+    hearth: [
+      { e: '✦', n: '45-Day Dry-Aged Ribeye', p: '8oz · 16oz', d: 'Akaushi beef, bone-marrow butter, roasted over the oak hearth.', t: 'Signature', s: true },
+      { e: '✦', n: 'Filet of A5 Wagyu',      p: 'Market',     d: 'Pommes purée, charred cipollini, red-wine bordelaise.', s: true },
+      { e: '✦', n: 'Whole Roasted Dover Sole', p: '',         d: 'Brown butter, capers, Meyer lemon, toasted almond.', s: true },
+      { e: '✦', n: 'Rack of Lamb',           p: '',           d: 'Pistachio crust, fava, mint, rosemary jus.', s: true },
+    ],
+    sweets: [
+      { e: '✦', n: 'Grand Marnier Soufflé',     p: '', d: 'Crème anglaise, candied orange. Twenty minutes — worth the wait.', t: 'To finish', s: true },
+      { e: '✦', n: 'Dark Chocolate Marquise',   p: '', d: 'Burnt honey, smoked sea salt, gold leaf.', s: true },
+      { e: '✦', n: 'The Cheese Trolley',        p: '', d: 'Artisan selection, quince, lavash, Hill Country honeycomb.', s: true },
+    ],
+    cellar: [
+      { e: '✦', n: 'Sommelier Pairing',          p: 'Per guest', d: 'Five glasses chosen to walk beside the tasting menu.', s: true },
+      { e: '✦', n: 'Barrel-Aged Old Fashioned',  p: '', d: 'House bourbon, smoked demerara, orange oil.', s: true },
+      { e: '✦', n: 'Champagne by the Glass',     p: '', d: 'Grower cuvée, a rotating selection.', s: true },
+      { e: '✦', n: 'The Reserve List',           p: '', d: 'Bordeaux, Napa cabernet, rare Texas vintages. Ask your captain.', s: true },
+    ],
+  };
+
+  // Menu presentation per mode — copy, tabs, and the items to show.
+  const MENU_MODES = {
+    day: {
+      kicker: 'The Goods', title: 'The Menu', defaultCat: 'pit', items: MENU,
+      lede: "Smoked meats by the pound, smash burgers off the flat-top, sammiches and scratch-made sides. When it's gone, it's gone — so don't dawdle.",
+      note: 'Plates served with pickled onions, sauce &amp; sliced bread. Sides by the single, pint, or quart. Market items priced daily — call to order at <a href="tel:+16628015181">662-801-5181</a>.',
+      tabs: [['pit', 'From the Pit'], ['burgers', 'Smash Burgers'], ['sammich', 'Sammiches'], ['sides', "Sides &amp; Fixin's"], ['chitlins', 'Chitlins'], ['sips', 'Sips']],
+    },
+    night: {
+      kicker: 'The Table', title: 'The Tasting Menu', defaultCat: 'tasting', items: SUPPER_MENU,
+      lede: 'Caviar, dry-aged beef, and the morning’s Gulf catch — composed nightly by the chef. One seating, reservations only.',
+      note: 'Menus change nightly with the season; cellar pairings available. Kindly advise us of any dietary needs when you reserve.',
+      tabs: [['tasting', 'The Tasting'], ['caviar', 'Caviar &amp; Raw'], ['first', 'First Courses'], ['hearth', 'From the Hearth'], ['sweets', 'Sweets'], ['cellar', 'The Cellar']],
+    },
+  };
+
+  // Refined plated-food imagery for the Supper Club gallery.
+  // (Falls back to the elegant glyph tile if a photo can't load.)
+  const U = (id) => `https://images.unsplash.com/photo-${id}?w=900&q=80&auto=format&fit=crop`;
+  const NIGHT_GALLERY = [
+    { emoji: '🥩', cap: 'Dry-aged ribeye, oak hearth', ar: '1',    img: U('1546964124-0cce460f38ef') },
+    { emoji: '🦪', cap: 'Gulf oysters & mignonette',   ar: '1',    img: U('1559339352-11d035aa65de') },
+    { emoji: '🍽️', cap: "The chef's plating",          ar: '1',    img: U('1504674900247-0877df9cc836') },
+    { emoji: '🥂', cap: 'From the cellar',             ar: '1',    img: U('1510812431401-41d2bd2722f3') },
+    { emoji: '🍷', cap: 'Reserve pours',               ar: '1',    img: U('1474722883778-792e7990302f') },
+    { emoji: '🍫', cap: 'Dark chocolate marquise',     ar: '1',    img: U('1551024601-bec78aea704b') },
+    { emoji: '🐟', cap: 'Roasted Dover sole',          ar: '1',    img: U('1467003909585-2f8a72700288') },
+    { emoji: '🕯️', cap: 'The dining room, after dark', ar: '1.68', img: U('1414235077428-338989a2e8c0') },
+  ];
+
+  const SUPPER_FAQ = [
+    { q: 'How do I reserve a table?', a: 'Seats are released on Resy at the first of each month and tend to go within the hour. Use “Reserve on Resy” above, or inquire with us directly for private dining.' },
+    { q: 'Is there a dress code?', a: 'Smart elegant. Jackets are welcome but not required — we simply ask that you arrive ready for a long, unhurried evening.' },
+    { q: 'What does an evening look like?', a: 'One seating at seven o’clock, a single seven-course tasting menu, optional cellar pairings, and as much time as the night allows. Plan for roughly two and a half hours.' },
+    { q: 'Can you accommodate dietary needs?', a: 'Gladly — note them when you reserve and the kitchen will compose around them. We ask for notice so the chef can source accordingly.' },
+    { q: 'Do you offer private dining or buyouts?', a: 'Yes. The Cellar Room seats up to twelve, and full buyouts are available on select evenings. See Private Dining to inquire.' },
+    { q: 'Where are you, and is there valet?', a: 'Downtown Tupelo. Valet is available on supper-club evenings and for private events on request.' },
+  ];
+
+  // Night version of the story block (the day copy is captured from the page).
+  const STORY_NIGHT = {
+    kicker: 'The Supper Club',
+    title: 'An invitation, <em>after dark.</em>',
+    img: U('1414235077428-338989a2e8c0'),
+    imgAlt: 'A candlelit supper-club dining room',
+    body: `
+      <p class="reveal">When the pit cools, the room is transformed. Candlelight,
+      low vinyl, pressed linen, and a single seating for those in the know &mdash;
+      the quiet, considered other half of the house, entirely by reservation.</p>
+      <p class="reveal">The chef composes a <strong>seven-course tasting</strong>
+      each evening from caviar, dry-aged beef, and the morning's Gulf catch, met
+      glass for glass from a reserve cellar. No menu to order from. No rush. Just
+      an evening made for you.</p>
+      <p class="reveal story__twist">Established, private, and unhurried &mdash;
+      the finest table in Tupelo, set after dark.</p>`,
+  };
+
   const $  = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -143,18 +241,31 @@
   const heroTag = $('#heroTag');
   const heroHours = $('#heroHours');
 
+  const heroEyebrow = $('#heroEyebrow');
+  const heroSlab = $('#heroSlab');
+  const heroMetaLead = $('#heroMetaLead');
+  const heroScrollText = $('#heroScrollText');
+
   const COPY = {
     day: {
       label: 'The Pit',
       hint: 'Enter the Supper Club ✦',
+      eyebrow: 'Same name. Same attitude. Now in Tupelo.',
+      slab: "Q'n 2 · BBQ & Smash Burgers",
       tag: "BBQ & smash burgers, smoked low and slow. Don't be afraid of flavor.",
+      metaLead: "<strong>Now slangin'</strong> · Downtown Tupelo, MS",
       hours: "Wed–Fri 11–7 · Sat 11–5 · slangin' til it's gone",
+      scroll: 'smell that?',
     },
     night: {
       label: 'Supper Club',
       hint: '☀ Back to The Pit',
-      tag: 'Candlelight, vinyl, and a five-course chef’s menu. Reservations only.',
-      hours: 'Supper Club · select Fri & Sat · one seating at 7p',
+      eyebrow: 'By reservation · Downtown Tupelo',
+      slab: 'The Supper Club',
+      tag: 'A seven-course tasting, a reserve cellar, and a single seating. By reservation only.',
+      metaLead: '<strong>Members &amp; reservations</strong> · Downtown Tupelo',
+      hours: 'Select evenings · one seating at 7 o’clock',
+      scroll: 'after dark',
     },
   };
 
@@ -165,30 +276,34 @@
     const c = night ? COPY.night : COPY.day;
     modeLabel.textContent = c.label;
     if (modeHint) modeHint.textContent = c.hint;
+    heroEyebrow.textContent = c.eyebrow;
+    heroSlab.textContent = c.slab;
     heroTag.textContent = c.tag;
+    heroMetaLead.innerHTML = c.metaLead;
     heroHours.innerHTML = c.hours;
-    if (night && $('#menuGrid').dataset.cat !== 'supper') {
-      // nudge the menu toward the supper club when night falls
-      switchMenu('supper');
-    } else if (!night && $('#menuGrid').dataset.cat === 'supper') {
-      switchMenu('pit');
-    }
+    heroScrollText.textContent = c.scroll;
+    // Swap the entire experience — not just the palette.
+    setMenuMode(night ? 'night' : 'day');
+    renderGallery(night ? NIGHT_GALLERY : GALLERY);
+    renderFaq(night ? SUPPER_FAQ : FAQ);
+    setStory(night);
     if (save) localStorage.setItem('bb-mode', night ? 'night' : 'day');
   };
 
   modeBtn.addEventListener('click', () => applyMode(!document.body.classList.contains('is-night')));
-  // NOTE: the initial restore is called at the end of the MENU section below,
-  // once renderMenu/switchMenu and their elements are initialized (avoids a TDZ
-  // ReferenceError when a returning visitor had night mode saved).
+  // NOTE: the initial restore is called at the very end of this file, once every
+  // render function and its DOM hooks are initialized (avoids a TDZ error when a
+  // returning visitor had night mode saved).
 
   /* ---------------------------------------------------------
-     3. MENU — tabbed, animated
+     3. MENU — mode-driven tabs, copy & items
      --------------------------------------------------------- */
   const menuGrid = $('#menuGrid');
-  const tabs = $$('.menu__tab');
+  const menuTabs = $('#menuTabs');
+  let menuMode = 'day';
 
   function renderMenu(cat) {
-    const items = MENU[cat] || [];
+    const items = MENU_MODES[menuMode].items[cat] || [];
     menuGrid.dataset.cat = cat;
     menuGrid.innerHTML = items.map((it, i) => `
       <article class="menu-item ${it.s ? 'menu-item--supper' : ''}" style="animation-delay:${i * 55}ms">
@@ -204,16 +319,26 @@
       </article>`).join('');
   }
 
-  function switchMenu(cat) {
-    tabs.forEach(t => t.classList.toggle('is-active', t.dataset.cat === cat));
-    renderMenu(cat);
+  function setMenuMode(mode) {
+    if (!MENU_MODES[mode]) return;
+    menuMode = mode;
+    const conf = MENU_MODES[mode];
+    $('#menuKicker').textContent = conf.kicker;
+    $('#menuTitle').textContent = conf.title;
+    $('#menuLede').textContent = conf.lede;
+    $('#menuNote').innerHTML = conf.note;
+    menuTabs.innerHTML = conf.tabs.map(([cat, label], i) =>
+      `<button class="menu__tab ${i === 0 ? 'is-active' : ''}" data-cat="${cat}" role="tab">${label}</button>`
+    ).join('');
+    renderMenu(conf.defaultCat);
   }
 
-  tabs.forEach(t => t.addEventListener('click', () => switchMenu(t.dataset.cat)));
-  renderMenu('pit');
-
-  // now that the menu is wired up, restore the saved day/night preference
-  applyMode(localStorage.getItem('bb-mode') === 'night', false);
+  menuTabs.addEventListener('click', (e) => {
+    const t = e.target.closest('.menu__tab');
+    if (!t) return;
+    $$('.menu__tab', menuTabs).forEach(x => x.classList.toggle('is-active', x === t));
+    renderMenu(t.dataset.cat);
+  });
 
   /* ---------------------------------------------------------
      4. ORDER BUILDER — a little demo cart
@@ -317,16 +442,21 @@
      6. GALLERY + LIGHTBOX
      --------------------------------------------------------- */
   const galleryGrid = $('#galleryGrid');
-  galleryGrid.innerHTML = GALLERY.map((g, i) => `
-    <figure class="gallery__tile" data-i="${i}">
-      <div class="gallery__tile-inner" style="--ar:${g.ar}">
-        <div class="gallery__fallback">${g.emoji}</div>
-        ${g.img ? `<img src="${g.img}" alt="${g.cap}" loading="lazy"
-              onload="this.style.position='relative';this.style.zIndex=1"
-              onerror="this.remove()">` : ''}
-      </div>
-      <figcaption class="gallery__cap">${g.cap}</figcaption>
-    </figure>`).join('');
+  let galleryData = GALLERY;
+
+  function renderGallery(data) {
+    galleryData = data;
+    galleryGrid.innerHTML = data.map((g, i) => `
+      <figure class="gallery__tile" data-i="${i}">
+        <div class="gallery__tile-inner" style="--ar:${g.ar}">
+          <div class="gallery__fallback">${g.emoji}</div>
+          ${g.img ? `<img src="${g.img}" alt="${g.cap}" loading="lazy"
+                onload="this.style.position='relative';this.style.zIndex=1"
+                onerror="this.remove()">` : ''}
+        </div>
+        <figcaption class="gallery__cap">${g.cap}</figcaption>
+      </figure>`).join('');
+  }
 
   const lb = $('#lightbox');
   const lbImg = $('#lightboxImg');
@@ -334,8 +464,8 @@
   let lbIndex = 0;
 
   function openLb(i) {
-    lbIndex = (i + GALLERY.length) % GALLERY.length;
-    const g = GALLERY[lbIndex];
+    lbIndex = (i + galleryData.length) % galleryData.length;
+    const g = galleryData[lbIndex];
     lbImg.style.backgroundImage = g.img ? `url("${g.img}")` : 'none';
     lbImg.textContent = g.img ? '' : g.emoji;
     lbCap.textContent = g.cap;
@@ -363,13 +493,15 @@
      6b. FAQ ACCORDION
      --------------------------------------------------------- */
   const faqList = $('#faqList');
-  faqList.innerHTML = FAQ.map((f, i) => `
-    <div class="faq__item">
-      <button class="faq__q" aria-expanded="false" aria-controls="faqa${i}">
-        ${f.q}<span class="faq__icon" aria-hidden="true">+</span>
-      </button>
-      <div class="faq__a" id="faqa${i}" role="region"><div class="faq__a-inner">${f.a}</div></div>
-    </div>`).join('');
+  function renderFaq(data) {
+    faqList.innerHTML = data.map((f, i) => `
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false" aria-controls="faqa${i}">
+          ${f.q}<span class="faq__icon" aria-hidden="true">+</span>
+        </button>
+        <div class="faq__a" id="faqa${i}" role="region"><div class="faq__a-inner">${f.a}</div></div>
+      </div>`).join('');
+  }
 
   faqList.addEventListener('click', (e) => {
     const btn = e.target.closest('.faq__q');
@@ -499,6 +631,38 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => el.classList.remove('is-show'), 3600);
   }
+
+  /* ---------------------------------------------------------
+     11. STORY swap (The Pit ↔ The Supper Club)
+     --------------------------------------------------------- */
+  const storyKicker = $('#storyKicker');
+  const storyTitle  = $('#storyTitle');
+  const storyBody   = $('#storyBody');
+  const storyImg    = $('#storyImg');
+  // capture the day version straight from the page markup
+  const STORY_DAY = {
+    kicker: storyKicker.textContent,
+    title:  storyTitle.innerHTML,
+    body:   storyBody.innerHTML,
+    img:    storyImg.getAttribute('src'),
+    imgAlt: storyImg.getAttribute('alt'),
+  };
+  function setStory(night) {
+    const s = night ? STORY_NIGHT : STORY_DAY;
+    storyKicker.textContent = s.kicker;
+    storyTitle.innerHTML = s.title;
+    storyBody.innerHTML = s.body;
+    storyImg.src = s.img;
+    storyImg.alt = s.imgAlt;
+    // freshly injected paragraphs aren't observed by the reveal IO, so show them
+    $$('.reveal', storyBody).forEach(el => el.classList.add('is-in'));
+  }
+
+  /* ---------------------------------------------------------
+     12. BOOT — render everything for the saved (or default) mode.
+     Runs last so every render function above is initialized.
+     --------------------------------------------------------- */
+  applyMode(localStorage.getItem('bb-mode') === 'night', false);
 
   /* footer year */
   $('#year').textContent = new Date().getFullYear();

@@ -99,6 +99,15 @@ body.is-night .visit__card { border-color: var(--line); }
 body.is-night .marquee__dot { filter: grayscale(1) brightness(1.6) sepia(1) saturate(2.2) hue-rotate(2deg); }
 body.is-night .menu__tab--night { border-style: solid; }
 
+/* refined glyphs (✦ ◆) instead of food emoji on the Supper Club menu */
+body.is-night .menu-item__emoji { color: var(--gold); font-size: 1.35rem; filter: none; line-height: 1.4; }
+
+/* ---------- MODE-SCOPED SECTIONS ----------
+   .pit-only shows only in daytime; .supper-only shows only at night.
+   We hide in the *wrong* mode so elements keep their natural display. */
+body:not(.is-night) .supper-only { display: none !important; }
+body.is-night .pit-only { display: none !important; }
+
 /* ---------- RESET / BASE ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -517,6 +526,18 @@ body.is-night .catering { background: var(--bg-2); }
 .btn--on-dark { color: var(--cream); }
 .btn--on-dark:hover { background: var(--cream); color: var(--char); }
 
+/* ---------- PRIVATE DINING (Supper Club only) ---------- */
+.private { background: var(--bg-2); color: var(--ink); }
+.private__inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.private h2 { color: var(--ink); }
+.private h2 em { color: var(--gold); }
+.private__copy .section__lede { color: var(--ink-soft); }
+.private__cta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
+.private__list { list-style: none; display: grid; gap: 0.9rem; }
+.private__list li { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 12px; font-family: var(--font-disp); letter-spacing: 0.06em; font-size: 0.92rem; transition: transform 0.3s var(--ease); }
+.private__list li:hover { transform: translateX(6px); }
+.private__list li span { color: var(--gold); font-size: 1rem; flex: none; }
+
 /* ---------- FAQ ---------- */
 .faq { background: var(--bg-2); }
 .faq__list { max-width: 820px; margin: 0 auto; display: grid; gap: 0.8rem; }
@@ -607,7 +628,7 @@ body.is-night .faq__item.is-open .faq__icon { color: #1a120a; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 980px) {
-  .story__grid, .order__inner, .reserve__inner { grid-template-columns: 1fr; }
+  .story__grid, .order__inner, .reserve__inner, .catering__inner, .private__inner { grid-template-columns: 1fr; }
   .story__art { max-width: 360px; margin: 0 auto; }
   .visit__grid { grid-template-columns: 1fr; }
   .footer__inner { grid-template-columns: 1fr; }

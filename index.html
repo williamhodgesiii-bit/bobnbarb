@@ -67,7 +67,7 @@
       <a href="#story">Story</a>
       <a href="#menu">Menu</a>
       <a href="#gallery">Gallery</a>
-      <a href="#order" class="nav__cta-soft">Order</a>
+      <a href="#order" class="nav__cta-soft pit-only">Order</a>
       <a href="#reserve">Supper Club</a>
       <a href="#visit">Visit</a>
     </nav>
@@ -97,22 +97,23 @@
 
     <div class="hero__inner">
       <img src="assets/logo.svg" alt="Bob and Barb's crest" class="hero__crest reveal" width="120" height="120" />
-      <p class="hero__eyebrow reveal" data-delay="1">Same name. Same attitude. Now in Tupelo.</p>
+      <p class="hero__eyebrow reveal" data-delay="1" id="heroEyebrow">Same name. Same attitude. Now in Tupelo.</p>
       <h1 class="hero__title">
         <span class="hero__title-script reveal">Bob &amp; Barb's</span>
-        <span class="hero__title-slab reveal" data-delay="1">Q'n 2 · BBQ &amp; Smash Burgers</span>
+        <span class="hero__title-slab reveal" data-delay="1" id="heroSlab">Q'n 2 · BBQ &amp; Smash Burgers</span>
       </h1>
       <p class="hero__tag reveal" data-delay="2" id="heroTag">
         BBQ &amp; smash burgers, smoked low and slow. Don't be afraid of flavor.
       </p>
 
       <div class="hero__cta reveal" data-delay="3">
-        <a href="#order" class="btn btn--ember" data-toast-order>Order on Toast</a>
-        <a href="#reserve" class="btn btn--ghost">Reserve a Night</a>
+        <a href="#order" class="btn btn--ember pit-only" data-toast-order>Order on Toast</a>
+        <a href="#reserve" class="btn btn--ghost supper-only" data-resy>Reserve on Resy</a>
+        <a href="#reserve" class="btn btn--ghost pit-only">Reserve a Night</a>
       </div>
 
       <div class="hero__meta reveal" data-delay="4">
-        <span><strong>Now slangin'</strong> · Downtown Tupelo, MS</span>
+        <span id="heroMetaLead"><strong>Now slangin'</strong> · Downtown Tupelo, MS</span>
         <span class="hero__meta-dot">•</span>
         <span id="heroHours">Wed–Fri 11–7 · Sat 11–5 · til it's gone</span>
       </div>
@@ -120,12 +121,12 @@
 
     <a href="#story" class="hero__scroll" aria-label="Scroll down">
       <span class="hero__scroll-line"></span>
-      <span class="hero__scroll-text">smell that?</span>
+      <span class="hero__scroll-text" id="heroScrollText">smell that?</span>
     </a>
   </section>
 
   <!-- ============ MARQUEE ============ -->
-  <div class="marquee" aria-hidden="true">
+  <div class="marquee pit-only" aria-hidden="true">
     <div class="marquee__track">
       <span>Smash Burgers</span><span class="marquee__dot">🔥</span>
       <span>Brisket</span><span class="marquee__dot">🔥</span>
@@ -152,33 +153,35 @@
     <div class="story__grid">
       <div class="story__art reveal">
         <div class="story__art-frame story__art-frame--photo">
-          <img src="assets/gallery/sign.jpg" alt="Bob &amp; Barb's sign: Don't be afraid of flavor" loading="lazy" />
+          <img id="storyImg" src="assets/gallery/sign.jpg" alt="Bob &amp; Barb's sign: Don't be afraid of flavor" loading="lazy" />
         </div>
       </div>
 
-      <div class="story__copy">
-        <p class="kicker reveal">The Story</p>
-        <h2 class="reveal">New sign. Same <em>attitude.</em></h2>
-        <p class="reveal">
-          Bob &amp; Barb's earned its name one plate at a time &mdash; the kind of
-          place where folks call ahead, line up, and leave with sauce on their
-          Sunday best. Now we're firing up <strong>Q'n 2</strong> in
-          <strong>downtown Tupelo</strong>, same recipes, same big flavor,
-          brand-new pit.
-        </p>
-        <p class="reveal">
-          It's done the only way that's ever made sense to us: hardwood smoke,
-          salt and pepper, and <strong>time</strong>. Brisket and pulled pork low
-          and slow, smash burgers with a lacy crispy edge, sides made from
-          scratch. No shortcuts. <strong>Don't be afraid of flavor.</strong>
-        </p>
-        <p class="reveal story__twist">
-          And on a few special weekend nights, we kill the lights, light the
-          candles, and the pit becomes <strong>a supper club</strong> &mdash;
-          white tablecloths, a chef's menu, and barbecue that wears a tie.
-        </p>
+      <div class="story__copy" id="storyCopy">
+        <p class="kicker reveal" id="storyKicker">The Story</p>
+        <h2 class="reveal" id="storyTitle">New sign. Same <em>attitude.</em></h2>
+        <div id="storyBody">
+          <p class="reveal">
+            Bob &amp; Barb's earned its name one plate at a time &mdash; the kind of
+            place where folks call ahead, line up, and leave with sauce on their
+            Sunday best. Now we're firing up <strong>Q'n 2</strong> in
+            <strong>downtown Tupelo</strong>, same recipes, same big flavor,
+            brand-new pit.
+          </p>
+          <p class="reveal">
+            It's done the only way that's ever made sense to us: hardwood smoke,
+            salt and pepper, and <strong>time</strong>. Brisket and pulled pork low
+            and slow, smash burgers with a lacy crispy edge, sides made from
+            scratch. No shortcuts. <strong>Don't be afraid of flavor.</strong>
+          </p>
+          <p class="reveal story__twist">
+            And on a few special weekend nights, we kill the lights, light the
+            candles, and the pit becomes <strong>a supper club</strong> &mdash;
+            white tablecloths, a chef's menu, and barbecue that wears a tie.
+          </p>
+        </div>
 
-        <div class="story__stats reveal">
+        <div class="story__stats reveal pit-only">
           <div class="stat"><span class="stat__num" data-count="2">0</span><span class="stat__label">locations &amp; counting</span></div>
           <div class="stat"><span class="stat__num" data-count="100">0</span><span class="stat__label">% scratch-made</span></div>
           <div class="stat"><span class="stat__num" data-count="4">0</span><span class="stat__label">sides, made fresh</span></div>
@@ -190,9 +193,9 @@
   <!-- ============ MENU ============ -->
   <section class="menu section" id="menu">
     <div class="section__head">
-      <p class="kicker reveal">The Goods</p>
-      <h2 class="reveal">The Menu</h2>
-      <p class="section__lede reveal">
+      <p class="kicker reveal" id="menuKicker">The Goods</p>
+      <h2 class="reveal" id="menuTitle">The Menu</h2>
+      <p class="section__lede reveal" id="menuLede">
         Smoked meats by the pound, smash burgers off the flat-top, sammiches and
         scratch-made sides. When it's gone, it's gone &mdash; so don't dawdle.
       </p>
@@ -210,7 +213,7 @@
 
     <div class="menu__grid" id="menuGrid" role="tabpanel"><!-- JS injects items --></div>
 
-    <p class="menu__note reveal">
+    <p class="menu__note reveal" id="menuNote">
       Plates served with pickled onions, sauce &amp; sliced bread. Sides by the
       single, pint, or quart. Market items priced daily &mdash; call to order at
       <a href="tel:+16628015181">662-801-5181</a>.
@@ -228,8 +231,8 @@
     <div class="gallery__grid" id="galleryGrid"><!-- JS injects tiles --></div>
   </section>
 
-  <!-- ============ ORDER ============ -->
-  <section class="order section" id="order">
+  <!-- ============ ORDER (Pit only) ============ -->
+  <section class="order section pit-only" id="order">
     <div class="order__inner">
       <div class="order__copy">
         <p class="kicker reveal">To Go</p>
@@ -342,8 +345,8 @@
     </div>
   </section>
 
-  <!-- ============ CATERING ============ -->
-  <section class="catering section" id="catering">
+  <!-- ============ CATERING (Pit only) ============ -->
+  <section class="catering section pit-only" id="catering">
     <div class="catering__inner reveal">
       <div class="catering__copy">
         <p class="kicker kicker--gold">Feed the Whole Crew</p>
@@ -363,6 +366,31 @@
         <li><span>🔥</span> On-site pit &amp; live-fire service</li>
         <li><span>🐖</span> Whole-hog roasts (7 days' notice)</li>
         <li><span>🥧</span> Dessert &amp; sweet-tea bars</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PRIVATE DINING (Supper Club only) ============ -->
+  <section class="private section supper-only" id="private">
+    <div class="private__inner reveal">
+      <div class="private__copy">
+        <p class="kicker kicker--gold">By Invitation</p>
+        <h2>Private Dining &amp; <em>The Cellar</em></h2>
+        <p class="section__lede">
+          For those who prefer the evening to themselves. A discreet private room,
+          full buyouts, and bespoke menus composed with the chef. Our reserve
+          cellar and a dedicated captain see to every detail.
+        </p>
+        <div class="private__cta">
+          <a href="mailto:howdy@bobandbarbs.com?subject=Private%20Dining%20Inquiry" class="btn btn--gold">Inquire Privately</a>
+          <a href="#reserve" class="btn btn--ghost btn--on-dark" data-resy>Membership &amp; Reservations</a>
+        </div>
+      </div>
+      <ul class="private__list">
+        <li><span>✦</span> The Cellar Room · seats up to 12</li>
+        <li><span>✦</span> Full buyouts &amp; bespoke tasting menus</li>
+        <li><span>✦</span> Sommelier pairings from the reserve list</li>
+        <li><span>✦</span> Dedicated captain &amp; valet on request</li>
       </ul>
     </div>
   </section>

@@ -9,19 +9,23 @@ nights. Brand voice and the real menu/photos come straight from the
 **Call to order: 662-801-5181** · Wed–Fri 11–7 · Sat 11–5
 
 The signature feature is the **Day / Night mode toggle** in the nav (☀ *The Pit*
-↔ ☾ *The Supper Club*) that re-themes the entire site — palette, copy, embers,
-and menu — to match the restaurant's two personalities.
+↔ ☾ *The Supper Club*). It doesn't just recolor the site — it swaps it for a
+different restaurant: a different menu, gallery, story, FAQ, and sections, plus
+a sleek high-end palette. Online ordering is hidden after dark.
 
 ## ✨ Features
 
-- **Day / Night re-theming** — one click flips the whole site from a warm,
-  butcher-paper "Pit" look to a brass-and-charcoal "Supper Club" mood.
+- **Two restaurants, one toggle** — by day, a warm butcher-paper BBQ "Pit"; by
+  night, a pristine, near-black, champagne-gold "Supper Club" with an entirely
+  different fine-dining menu, gallery, story, and FAQ. The flaming marquee,
+  catering, and online ordering give way to a tasting menu and Private Dining.
 - **Animated hero** — a live canvas ember/spark field (turns gold at night) with
-  drifting smoke and a neon-script logo.
-- **Interactive menu** — tabbed categories (From the Pit, Plates & Sammies,
-  Sides, Sweets, Sips, and the Supper Club tasting menu).
-- **Quick-Tray order builder** — a demo cart with live totals, ready to wire to
-  Toast / Square / ChowNow.
+  drifting smoke and a neon-script logo. Hero copy swaps with the mode.
+- **Interactive menu** — mode-aware tabbed categories: BBQ by day (From the Pit,
+  Smash Burgers, Sammiches, Sides, Chitlins, Sips); a tasting menu by night
+  (The Tasting, Caviar & Raw, First Courses, From the Hearth, Sweets, The Cellar).
+- **Quick-Tray order builder** — a demo cart (daytime only) wired to a
+  configurable Toast online-ordering link.
 - **Supper Club reservations** — upcoming-nights list with availability badges
   and a validated booking form (ready for Resy / Tock / OpenTable).
 - **Masonry gallery** with a keyboard-navigable lightbox.
