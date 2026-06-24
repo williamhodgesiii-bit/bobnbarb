@@ -6,6 +6,26 @@
   'use strict';
 
   /* ---------------------------------------------------------
+     ⚙️  LIVE SERVICE LINKS — paste your real URLs here.
+     Until you do, the buttons fall back to the demo flows below
+     and show a friendly "coming soon" toast.
+
+       TOAST_ORDER_URL  → your Toast online-ordering page
+                          (e.g. https://order.toasttab.com/online/your-restaurant)
+       RESY_RESERVE_URL → your Resy booking page
+                          (e.g. https://resy.com/cities/.../venues/your-venue)
+     --------------------------------------------------------- */
+  const TOAST_ORDER_URL  = '';   // ← paste Toast online-ordering link
+  const RESY_RESERVE_URL = '';   // ← paste Resy reservation link
+
+  // open an external service link in a new tab; returns true if a link existed
+  function openService(url) {
+    if (!url) return false;
+    window.open(url, '_blank', 'noopener');
+    return true;
+  }
+
+  /* ---------------------------------------------------------
      DATA — swap these out for the real menu / events / prices
      --------------------------------------------------------- */
   const MENU = {
@@ -119,17 +139,20 @@
      --------------------------------------------------------- */
   const modeBtn = $('#modeToggle');
   const modeLabel = $('#modeLabel');
+  const modeHint = $('#modeHint');
   const heroTag = $('#heroTag');
   const heroHours = $('#heroHours');
 
   const COPY = {
     day: {
       label: 'The Pit',
+      hint: 'Enter the Supper Club ✦',
       tag: "BBQ & smash burgers, smoked low and slow. Don't be afraid of flavor.",
       hours: "Wed–Fri 11–7 · Sat 11–5 · slangin' til it's gone",
     },
     night: {
       label: 'Supper Club',
+      hint: '☀ Back to The Pit',
       tag: 'Candlelight, vinyl, and a five-course chef’s menu. Reservations only.',
       hours: 'Supper Club · select Fri & Sat · one seating at 7p',
     },
@@ -141,6 +164,7 @@
     modeBtn.setAttribute('aria-pressed', String(night));
     const c = night ? COPY.night : COPY.day;
     modeLabel.textContent = c.label;
+    if (modeHint) modeHint.textContent = c.hint;
     heroTag.textContent = c.tag;
     heroHours.innerHTML = c.hours;
     if (night && $('#menuGrid').dataset.cat !== 'supper') {
@@ -227,11 +251,20 @@
   });
   $('#orderSend').addEventListener('click', (e) => {
     e.preventDefault();
+    // If a real Toast link is set, send folks straight there.
+    if (openService(TOAST_ORDER_URL)) return;
     const count = cart.reduce((s, it) => s + it.qty, 0);
     if (!count) { toast("Add somethin' to your tray first, hon."); return; }
-    toast(`🔥 ${count} item${count === 1 ? '' : 's'} fired to the pit! (Demo — connect Toast/Square here.)`);
+    toast(`🔥 ${count} item${count === 1 ? '' : 's'} ready — connect your Toast link to check out online.`);
   });
   renderOrder();
+
+  // "Order on Toast" buttons (hero + order section) jump straight to Toast.
+  $$('[data-toast-order]').forEach(btn => btn.addEventListener('click', (e) => {
+    if (openService(TOAST_ORDER_URL)) { e.preventDefault(); return; }
+    // no link yet → let the anchor fall through to the #order section
+    toast('Online ordering on Toast is coming soon — call 662-801-5181 to order.');
+  }));
 
   /* ---------------------------------------------------------
      5. RESERVATIONS — events + form
@@ -261,12 +294,24 @@
       if (bad) ok = false;
     });
     if (!ok) { reserveNote.textContent = 'Mind the highlighted fields, please.'; reserveNote.className = 'reserve__formnote'; return; }
+    // Hand the booking off to Resy if a link is configured.
+    if (openService(RESY_RESERVE_URL)) {
+      reserveNote.textContent = 'Opening Resy to finish your reservation…';
+      reserveNote.className = 'reserve__formnote success';
+      return;
+    }
     const name = $('#rName').value.trim().split(' ')[0];
-    reserveNote.textContent = `🥂 Thank you, ${name}! Your request is in — we’ll confirm by email. (Demo — wire to Resy/Tock/OpenTable.)`;
+    reserveNote.textContent = `🥂 Thank you, ${name}! Your request is in — we’ll confirm by email. (Add your Resy link to book instantly.)`;
     reserveNote.className = 'reserve__formnote success';
     reserveForm.reset();
     toast('Table requested — check your inbox soon!');
   });
+
+  // "Reserve on Resy" buttons jump straight to Resy when a link is set.
+  $$('[data-resy]').forEach(btn => btn.addEventListener('click', (e) => {
+    if (openService(RESY_RESERVE_URL)) { e.preventDefault(); return; }
+    toast('Resy booking is coming soon — fill out the form or call 662-801-5181.');
+  }));
 
   /* ---------------------------------------------------------
      6. GALLERY + LIGHTBOX

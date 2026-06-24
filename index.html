@@ -74,12 +74,15 @@
 
     <div class="nav__right">
       <button class="mode-toggle" id="modeToggle" aria-pressed="false" title="Switch between the daytime Pit and the nighttime Supper Club">
-        <span class="mode-toggle__track">
-          <span class="mode-toggle__thumb"></span>
-          <span class="mode-toggle__icon mode-toggle__icon--sun">☀</span>
-          <span class="mode-toggle__icon mode-toggle__icon--moon">☾</span>
+        <span class="mode-toggle__hint" id="modeHint">Tap to switch</span>
+        <span class="mode-toggle__pill">
+          <span class="mode-toggle__track">
+            <span class="mode-toggle__thumb"></span>
+            <span class="mode-toggle__icon mode-toggle__icon--sun">☀</span>
+            <span class="mode-toggle__icon mode-toggle__icon--moon">☾</span>
+          </span>
+          <span class="mode-toggle__label" id="modeLabel">The Pit</span>
         </span>
-        <span class="mode-toggle__label" id="modeLabel">The Pit</span>
       </button>
       <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -104,7 +107,7 @@
       </p>
 
       <div class="hero__cta reveal" data-delay="3">
-        <a href="#order" class="btn btn--ember">Order the Pit</a>
+        <a href="#order" class="btn btn--ember" data-toast-order>Order on Toast</a>
         <a href="#reserve" class="btn btn--ghost">Reserve a Night</a>
       </div>
 
@@ -256,10 +259,11 @@
             <span>Subtotal</span>
             <span id="orderTotal">$0.00</span>
           </div>
-          <a href="#" class="btn btn--ember btn--block" id="orderSend">Send to the Kitchen</a>
+          <a href="#" class="btn btn--ember btn--block" id="orderSend">Order on Toast</a>
           <p class="order__fineprint">
-            Demo cart &mdash; wire <code>#orderSend</code> to Toast, Square, or
-            ChowNow for live online ordering.
+            Checkout &amp; pay online through <strong>Toast</strong>. Add your
+            Toast link in <code>js/main.js</code> (<code>TOAST_ORDER_URL</code>)
+            to go live.
           </p>
         </div>
       </div>
@@ -279,6 +283,10 @@
         </p>
 
         <ul class="reserve__events reveal" id="reserveEvents"><!-- JS injects events --></ul>
+
+        <a href="#reserveForm" class="btn btn--gold reserve__resy reveal" data-resy>
+          Reserve on Resy <span aria-hidden="true">→</span>
+        </a>
       </div>
 
       <form class="reserve__form reveal" id="reserveForm" novalidate>
@@ -325,10 +333,10 @@
           <textarea id="rNotes" name="notes" rows="2" placeholder="Allergies, celebrations, a hankering..."></textarea>
         </div>
 
-        <button type="submit" class="btn btn--gold btn--block">Request a Table</button>
+        <button type="submit" class="btn btn--gold btn--block">Reserve on Resy</button>
         <p class="reserve__formnote" id="reserveNote" role="status">
-          We'll confirm by email within a day. Seats are held with a card &mdash;
-          connect a real booking service (Resy, Tock, OpenTable) here.
+          Booked instantly through <strong>Resy</strong>. Add your Resy link in
+          <code>js/main.js</code> (<code>RESY_RESERVE_URL</code>) to go live.
         </p>
       </form>
     </div>

@@ -73,12 +73,19 @@ Address, phone, email, hours, and social links are plain HTML in
 
 ### Wiring up the real services
 
-The order, reservation, and newsletter flows are functional demos. To go live:
+The order and reservation buttons are already wired — just drop in your links.
+At the very top of **`js/main.js`** set:
 
-- **Online ordering** — point `#orderSend` (in `main.js`) at your Toast/Square/
-  ChowNow ordering URL, or embed their widget in the `#order` section.
-- **Reservations** — replace the `reserveForm` submit handler with a Resy/Tock/
-  OpenTable embed or a POST to your booking backend.
+```js
+const TOAST_ORDER_URL  = 'https://order.toasttab.com/online/your-restaurant';
+const RESY_RESERVE_URL = 'https://resy.com/cities/.../venues/your-venue';
+```
+
+- **Online ordering (Toast)** — every "Order on Toast" button (hero + the Quick
+  Tray's checkout) opens `TOAST_ORDER_URL` in a new tab. Until it's set, they
+  fall back to the on-page demo tray and a friendly "coming soon" message.
+- **Reservations (Resy)** — the "Reserve on Resy" buttons and the booking form
+  hand off to `RESY_RESERVE_URL`. Until it's set, the form runs as a demo.
 - **Newsletter** — point `newsForm` at Mailchimp/Klaviyo/Beehiiv.
 
 ## 🌐 Deploy on Vercel
