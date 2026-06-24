@@ -16,7 +16,7 @@
   <!-- seal text -->
   <g fill="currentColor" font-family="'Oswald', sans-serif" font-weight="600" letter-spacing="2.5">
     <text font-size="10"><textPath href="#bbTop" startOffset="50%" text-anchor="middle">BOB &amp; BARB'S</textPath></text>
-    <text font-size="8"><textPath href="#bbBot" startOffset="50%" text-anchor="middle">TUPELO · MISSISSIPPI</textPath></text>
+    <text font-size="8"><textPath href="#bbBot" startOffset="50%" text-anchor="middle">Q'N 2 · TUPELO MS</textPath></text>
   </g>
 
   <!-- side stars -->

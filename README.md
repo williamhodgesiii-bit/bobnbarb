@@ -1,8 +1,12 @@
-# 🔥 Bob & Barb's — Barbecue & Supper Club
+# 🔥 Bob & Barb's Q'n 2 — BBQ, Burgers & Supper Club
 
-A modern, interactive website for **Bob & Barb's**, a barbecue joint reborn in
-**downtown Tupelo, Mississippi** — a low-and-slow pit by day and a candlelit,
-reservation-only **Supper Club** on select weekend nights.
+A modern, interactive website for **Bob & Barb's Q'n 2**, the barbecue &
+smash-burger joint coming to **downtown Tupelo, Mississippi** — a low-and-slow
+pit by day and a candlelit, reservation-only **Supper Club** on select weekend
+nights. Brand voice and the real menu/photos come straight from the
+[@bnbqn2](https://instagram.com/bnbqn2) feed. *Don't be afraid of flavor.*
+
+**Call to order: 662-801-5181** · Wed–Fri 11–7 · Sat 11–5
 
 The signature feature is the **Day / Night mode toggle** in the nav (☀ *The Pit*
 ↔ ☾ *The Supper Club*) that re-themes the entire site — palette, copy, embers,
@@ -57,7 +61,7 @@ Almost everything you'll want to change lives in the `DATA` blocks at the top of
 | Menu items & prices | `MENU` object |
 | Quick-order items | `QUICK` array |
 | Supper Club nights | `EVENTS` array |
-| Gallery photos | `GALLERY` array (swap the `img` URLs for your own photos) |
+| Gallery photos | `GALLERY` array → files in `assets/gallery/` (real @bnbqn2 shots) |
 | Day/Night hero copy | `COPY` object |
 
 Brand colors, fonts, and spacing are CSS variables at the top of
@@ -77,10 +81,31 @@ The order, reservation, and newsletter flows are functional demos. To go live:
   OpenTable embed or a POST to your booking backend.
 - **Newsletter** — point `newsForm` at Mailchimp/Klaviyo/Beehiiv.
 
-## 🌐 Deploy
+## 🌐 Deploy on Vercel
 
-Drop the folder on any static host — **GitHub Pages, Netlify, Vercel, or
-Cloudflare Pages**. No configuration needed.
+This repo is Vercel-ready (`vercel.json` sets clean URLs + asset caching; it's a
+static site, so there's **no build step**).
+
+**Option A — Import the Git repo (easiest, ~1 min):**
+1. Go to **[vercel.com/new](https://vercel.com/new)** and sign in with GitHub.
+2. Import **`williamhodgesiii-bit/bobnbarb`**.
+3. Framework Preset: **Other**. Leave Build Command and Output Directory blank.
+4. Click **Deploy**. You'll get a live `*.vercel.app` URL, and every push
+   redeploys automatically.
+   - This site currently lives on the branch `claude/kind-fermat-scb0df`. Either
+     merge it into your production branch, or in **Project → Settings → Git** set
+     that branch as the Production Branch (or just open the preview URL Vercel
+     builds for the branch).
+
+**Option B — Vercel CLI:**
+```bash
+npm i -g vercel
+vercel login
+vercel --prod      # run from the repo root
+```
+
+Any other static host (Netlify, Cloudflare Pages, GitHub Pages) works too — no
+configuration needed.
 
 ---
 

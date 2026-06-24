@@ -10,39 +10,39 @@
      --------------------------------------------------------- */
   const MENU = {
     pit: [
-      { e: '🥩', n: 'Brisket',        p: '$26/lb', d: 'Post-oak smoked 16 hours. Black-pepper bark, pink ring, the works.', t: 'Sells out first' },
-      { e: '🐖', n: 'Pulled Pork',    p: '$18/lb', d: 'Boston butt, low and slow, pulled to order. Sauce optional, but why.' },
-      { e: '🍖', n: 'St. Louis Ribs', p: '$24/rack',d: 'Hickory-kissed, tender-with-a-tug. Dry rub or glazed.' },
-      { e: '🌭', n: 'Jalapeño Hot Links', p: '$9',  d: 'House-ground, snappy casing, a slow Mississippi burn.', t: 'Spicy' },
-      { e: '🦃', n: 'Smoked Turkey',  p: '$17/lb', d: 'Brined two days so it never dries out. The sleeper hit.' },
-      { e: '🔥', n: 'Burnt Ends',     p: '$14',    d: 'Brisket point, cubed, candied in the smoker. Friday & Saturday only.', t: 'Weekend drop' },
+      { e: '🥩', n: 'Brisket',        p: '$22/lb', d: 'Smoked low and slow over hardwood. Peppery bark, pink ring, no shortcuts.', t: 'Sells out first' },
+      { e: '🐖', n: 'Pulled Pork',    p: '$18/lb', d: 'Boston butt pulled to order. Don\'t be afraid of flavor.' },
+      { e: '🍖', n: 'Smoked Ribs',    p: 'Market',  d: 'Fall-off-tender, glazed and char-kissed. While they last.', t: 'Weekend' },
+      { e: '🍽️', n: '1 Meat & 2 Sides', p: '$13',  d: 'Served with pickled onions, sauce & sliced bread. The everyday plate.' },
+      { e: '🍽️', n: '2 Meat & 2 Sides', p: '$23',  d: 'Can\'t pick just one? You don\'t have to.' },
     ],
-    plates: [
-      { e: '🍽️', n: 'The Two-Meat Plate', p: '$19', d: 'Pick two, two sides, white bread, pickles & onion. The classic.' },
-      { e: '🥪', n: 'Chopped Brisket Sammie', p: '$13', d: 'Piled on a brioche bun with slaw and a pickle spear.' },
-      { e: '🌮', n: 'Pulled Pork Tacos',  p: '$12', d: 'Three soft tacos, charred corn salsa, crema, cilantro.' },
-      { e: '🥗', n: 'Smokehouse Salad',  p: '$14', d: 'Greens, smoked turkey, cornbread croutons, buttermilk-ranch.' },
-      { e: '👑', n: "The Whole Hog Board", p: '$48', d: 'For the table — brisket, ribs, pork, links, all four sides.', t: 'Feeds 3–4' },
+    burgers: [
+      { e: '🍔', n: 'Single Smash & Fries', p: '$10', d: 'Crispy-edged smashed patty, American, the works — with a basket of fries.', t: 'House favorite' },
+      { e: '🍔', n: 'Double Smash & Fries', p: '$12', d: 'Two patties, double the lacy crust. Comes with fries.' },
+      { e: '🔥', n: 'The Loaded Smash',     p: 'Market',d: 'Smash patty piled with slaw, brisket & onions — a knife-and-fork situation.', t: 'Go big' },
+    ],
+    sammich: [
+      { e: '🥪', n: 'Brisket Sammich',  p: '$14', d: 'Chopped brisket, pickled onion, sauce. Add a side $3.' },
+      { e: '🥪', n: 'Pulled Pork Sammich', p: '$11', d: 'Piled high. Jumbo $16. Add a side $3.' },
+      { e: '🐷', n: '"Lil Bobby"', p: '$10', d: 'Pulled pork sammich, cut down to a Lil Bobby. Still mighty.' },
+      { e: '🐄', n: '"Lil Barby"', p: '$10', d: 'Brisket sammich, Barb-sized. The lunch-hour legend.' },
+      { e: '🍞', n: 'Hungry Sammich', p: '$6', d: 'When you just need a little somethin\'. No judgment.' },
     ],
     sides: [
-      { e: '🧀', n: 'Smoked Mac & Cheese', p: '$6', d: 'Three cheeses, finished in the pit for a smoky crust.' },
-      { e: '🫘', n: 'Burnt-End Baked Beans', p: '$6', d: 'Sweet, smoky, studded with chopped burnt ends.' },
-      { e: '🥬', n: 'Vinegar Slaw',  p: '$5', d: 'Crisp and tangy — the cut to all that richness.' },
-      { e: '🌽', n: 'Cast-Iron Cornbread', p: '$5', d: 'Honey butter, crackly edges. Don\'t skip it.' },
-      { e: '🥔', n: 'Loaded Tater Salad', p: '$5', d: 'Bacon, scallion, a whisper of mustard.' },
-      { e: '🍃', n: 'Collard Greens', p: '$5', d: 'Slow-cooked with smoked turkey and a little heat.' },
+      { e: '🥬', n: 'Collard Greens', p: '$3 / $8 / $12', d: 'Slow-cooked and seasoned right. Single · Pint · Quart.' },
+      { e: '🫘', n: 'Pinto Beans',    p: '$3 / $8 / $12', d: 'Smoky, soul-warming. Single · Pint · Quart.' },
+      { e: '🥔', n: 'Potato Salad',   p: '$3 / $8 / $12', d: 'Cool, creamy, classic. Single · Pint · Quart.' },
+      { e: '🥗', n: 'Slaw',           p: '$3 / $8 / $12', d: 'Crisp and tangy — the cut to all that smoke.' },
     ],
-    sweets: [
-      { e: '🍌', n: "Barb's Banana Puddin'", p: '$7', d: 'Vanilla wafers, fresh banana, torched meringue. A house legend.', t: 'Famous' },
-      { e: '🥧', n: 'Bourbon Pecan Pie',  p: '$8', d: 'Gooey, boozy, served warm with cream.' },
-      { e: '🍫', n: 'Skillet Brownie',    p: '$8', d: 'Smoked-salt caramel and vanilla bean ice cream.' },
-      { e: '🍑', n: 'Peach Cobbler',      p: '$7', d: 'Mississippi peaches, biscuit top, seasonal.' },
+    chitlins: [
+      { e: '🍲', n: 'Chitlins', p: 'Seasonal', d: 'Cleaned and cooked the old way. Ask when they\'re on — they go quick.', t: 'When they\'re on' },
+      { e: '🌭', n: 'Hot Links', p: 'Market', d: 'Snappy, smoky, a little heat. Pile \'em on a plate.' },
     ],
     sips: [
-      { e: '🧊', n: 'Sweet Tea',          p: '$3', d: 'The house wine of the South. Free refills.' },
-      { e: '🍋', n: 'Smoked Lemonade',    p: '$4', d: 'Tart, just-smoky, dangerously drinkable.' },
-      { e: '🍺', n: 'Local Drafts',       p: '$6', d: 'Rotating Mississippi taps. Ask what\'s pouring.' },
-      { e: '🥃', n: 'Bourbon Flight',     p: '$15',d: 'Three pours, your pitmaster\'s picks.', t: 'After 4p' },
+      { e: '🧊', n: 'Sweet Tea',     p: '$2', d: 'The house wine of Mississippi. Cold and proper.' },
+      { e: '🥤', n: 'Soda',          p: '$2', d: 'Ice-cold cans, your usual suspects.' },
+      { e: '🍺', n: 'Domestic Beer', p: '$3', d: 'Cold one to wash it down.' },
+      { e: '🍻', n: 'Premium Beer',  p: '$4', d: 'A little fancier. Happy Hour Fri 3–6.', t: 'Happy Hour' },
     ],
     supper: [
       { e: '✦', n: 'Amuse — Smoked Deviled Egg', p: 'Course 1', d: 'Trout roe, pickled mustard seed, smoked paprika oil.', s: true },
@@ -55,12 +55,12 @@
 
   // Quick-order featured items (name, emoji, numeric price)
   const QUICK = [
-    { e: '🥩', n: 'Brisket Plate',      p: 19 },
-    { e: '🍖', n: 'Half Rack Ribs',     p: 16 },
-    { e: '🥪', n: 'Brisket Sammie',     p: 13 },
-    { e: '🐖', n: 'Pulled Pork Plate',  p: 15 },
-    { e: '🧀', n: 'Smoked Mac',         p: 6  },
-    { e: '🍌', n: "Banana Puddin'",     p: 7  },
+    { e: '🍔', n: 'Single Smash & Fries', p: 10 },
+    { e: '🍔', n: 'Double Smash & Fries', p: 12 },
+    { e: '🥪', n: 'Brisket Sammich',      p: 14 },
+    { e: '🍽️', n: '1 Meat & 2 Sides',     p: 13 },
+    { e: '🐷', n: '"Lil Bobby"',          p: 10 },
+    { e: '🥬', n: 'Side (single)',        p: 3  },
   ];
 
   // Upcoming Supper Club nights
@@ -71,17 +71,16 @@
     { d: '23', m: 'AUG', title: 'Harvest Supper',        sub: 'Late-summer produce · wine pairings',  status: 'open', label: 'Booking' },
   ];
 
-  // Gallery tiles. img = optional photo URL (falls back to emoji art if it fails to load).
+  // Gallery tiles — real shots from the @bnbqn2 feed. (Swap/add your own in assets/gallery/.)
   const GALLERY = [
-    { emoji: '🔥', cap: 'The pit at 5am',        ar: '0.8', img: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=800&q=70' },
-    { emoji: '🥩', cap: 'Brisket, sliced',        ar: '1.2', img: 'https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=70' },
-    { emoji: '🍖', cap: 'Ribs off the smoker',    ar: '1',   img: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=70' },
-    { emoji: '🌶️', cap: 'House rub',              ar: '0.9', img: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&q=70' },
-    { emoji: '🍺', cap: 'Cold ones, local taps',  ar: '1.25',img: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=800&q=70' },
-    { emoji: '🕯️', cap: 'Supper Club, after dark',ar: '0.85',img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=70' },
-    { emoji: '🌽', cap: 'Cast-iron cornbread',    ar: '1',   img: 'https://images.unsplash.com/photo-1612203985729-70726954388c?w=800&q=70' },
-    { emoji: '🥧', cap: 'Pie of the day',         ar: '1.1', img: 'https://images.unsplash.com/photo-1535920527002-b35e96722eb9?w=800&q=70' },
-    { emoji: '🍌', cap: "Barb's banana puddin'",  ar: '0.95',img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&q=70' },
+    { emoji: '🍔', cap: 'The smash burger',        ar: '1',    img: 'assets/gallery/smashburger.jpg' },
+    { emoji: '🍔', cap: 'Loaded up',               ar: '1',    img: 'assets/gallery/loadedburger.jpg' },
+    { emoji: '🥩', cap: 'Brisket, done right',     ar: '1',    img: 'assets/gallery/brisket.jpg' },
+    { emoji: '🍖', cap: 'Ribs & pickled onion',    ar: '1',    img: 'assets/gallery/ribonion.jpg' },
+    { emoji: '🍽️', cap: 'Brisket & pulled pork',  ar: '1',    img: 'assets/gallery/combo.jpg' },
+    { emoji: '🌮', cap: 'Loaded, Mississippi-style',ar: '1',   img: 'assets/gallery/tacos.jpg' },
+    { emoji: '🔥', cap: 'In the dining room',      ar: '1',    img: 'assets/gallery/burntends.jpg' },
+    { emoji: '🪧', cap: "New sign, same attitude",  ar: '1.68', img: 'assets/gallery/sign.jpg' },
   ];
 
   const FAQ = [
@@ -126,8 +125,8 @@
   const COPY = {
     day: {
       label: 'The Pit',
-      tag: "Low-and-slow Mississippi 'cue by day. A candlelit supper club by night.",
-      hours: "Pit open Tue–Sun, 11a 'til the meat runs out",
+      tag: "BBQ & smash burgers, smoked low and slow. Don't be afraid of flavor.",
+      hours: "Wed–Fri 11–7 · Sat 11–5 · slangin' til it's gone",
     },
     night: {
       label: 'Supper Club',
