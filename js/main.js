@@ -571,22 +571,32 @@
     const cv = $('#embers');
     const ctx = cv.getContext('2d');
     let w, h, parts, raf;
-    const COUNT = () => Math.min(90, Math.floor(window.innerWidth / 14));
+    const COUNT = () => Math.min(150, Math.floor(window.innerWidth / 9));
 
     function resize() {
       w = cv.width = cv.offsetWidth * devicePixelRatio;
       h = cv.height = cv.offsetHeight * devicePixelRatio;
     }
+    // most embers rise from the bottom corners (where the "fire" is)
+    function spawnX() {
+      if (Math.random() < 0.62) {
+        const side = Math.random() < 0.5 ? 0 : 1;
+        const off = Math.pow(Math.random(), 1.6) * w * 0.34;
+        return side ? w - off : off;
+      }
+      return Math.random() * w;
+    }
     function spawn() {
       return {
-        x: Math.random() * w,
+        x: spawnX(),
         y: h + Math.random() * h * 0.4,
-        r: (Math.random() * 2 + 0.6) * devicePixelRatio,
-        vy: (Math.random() * 0.6 + 0.25) * devicePixelRatio,
-        vx: (Math.random() - 0.5) * 0.4 * devicePixelRatio,
-        a: Math.random() * 0.5 + 0.2,
-        tw: Math.random() * 0.02 + 0.005,
+        r: (Math.random() * 2.4 + 0.8) * devicePixelRatio,
+        vy: (Math.random() * 0.7 + 0.3) * devicePixelRatio,
+        vx: (Math.random() - 0.5) * 0.5 * devicePixelRatio,
+        a: Math.random() * 0.5 + 0.25,
+        tw: Math.random() * 0.025 + 0.006,
         ph: Math.random() * Math.PI * 2,
+        c: Math.random(),
       };
     }
     function init() { resize(); parts = Array.from({ length: COUNT() }, spawn); }
@@ -594,17 +604,24 @@
       ctx.clearRect(0, 0, w, h);
       const gold = document.body.classList.contains('is-night');
       for (const p of parts) {
-        p.y -= p.vy; p.x += p.vx + Math.sin((p.y + p.ph) * 0.01) * 0.3 * devicePixelRatio;
+        p.y -= p.vy; p.x += p.vx + Math.sin((p.y + p.ph) * 0.01) * 0.35 * devicePixelRatio;
         p.ph += p.tw;
-        const flick = p.a * (0.6 + 0.4 * Math.sin(p.ph * 6));
         if (p.y < -10) Object.assign(p, spawn(), { y: h + 10 });
+        const climb = Math.max(0, Math.min(1, p.y / h));     // 1 near the flame, 0 up high
+        const flick = p.a * (0.55 + 0.45 * Math.sin(p.ph * 6)) * (0.2 + 0.8 * climb);
+        const rr = p.r * (0.45 + 0.55 * climb);              // embers shrink as they cool
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = gold
-          ? `rgba(225,185,110,${flick})`
-          : `rgba(255,${120 + Math.random() * 60 | 0},60,${flick})`;
-        ctx.shadowBlur = 8 * devicePixelRatio;
-        ctx.shadowColor = gold ? 'rgba(216,166,82,0.8)' : 'rgba(255,110,40,0.8)';
+        ctx.arc(p.x, p.y, rr, 0, Math.PI * 2);
+        if (gold) {
+          const g = 175 + (p.c * 45 | 0);
+          ctx.fillStyle = `rgba(238,${g},135,${flick})`;
+          ctx.shadowColor = 'rgba(216,166,82,0.85)';
+        } else {
+          const g = 75 + (p.c * 110 + Math.random() * 35 | 0); // deep orange → bright yellow shimmer
+          ctx.fillStyle = `rgba(255,${g},40,${flick})`;
+          ctx.shadowColor = 'rgba(255,95,30,0.9)';
+        }
+        ctx.shadowBlur = 12 * devicePixelRatio;
         ctx.fill();
       }
       raf = requestAnimationFrame(frame);
