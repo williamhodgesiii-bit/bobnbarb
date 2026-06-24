@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bob &amp; Barb's &mdash; Barbecue &amp; Supper Club · Downtown Tupelo, MS</title>
+  <meta name="description" content="Low-and-slow Mississippi barbecue by day, a swanky reservation-only supper club by night. Bob &amp; Barb's is smokin' again in downtown Tupelo." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bob &amp; Barb's — Barbecue &amp; Supper Club" />
+  <meta property="og:description" content="Pit-smoked all day. Candlelit on weekend nights. Downtown Tupelo, Mississippi." />
+  <meta property="og:type" content="restaurant" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Rye&family=Yellowtail&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🔥</text></svg>" />
+</head>
+<body class="is-day">
+
+  <!-- ============ SMOKE / GRAIN OVERLAY ============ -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand" aria-label="Bob and Barb's home">
+      <span class="nav__brand-script">Bob &amp; Barb's</span>
+      <span class="nav__brand-sub">BBQ · TUPELO</span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#order" class="nav__cta-soft">Order</a>
+      <a href="#reserve">Supper Club</a>
+      <a href="#visit">Visit</a>
+    </nav>
+
+    <div class="nav__right">
+      <button class="mode-toggle" id="modeToggle" aria-pressed="false" title="Switch between the daytime Pit and the nighttime Supper Club">
+        <span class="mode-toggle__track">
+          <span class="mode-toggle__thumb"></span>
+          <span class="mode-toggle__icon mode-toggle__icon--sun">☀</span>
+          <span class="mode-toggle__icon mode-toggle__icon--moon">☾</span>
+        </span>
+        <span class="mode-toggle__label" id="modeLabel">The Pit</span>
+      </button>
+      <button class="nav__burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <canvas class="hero__embers" id="embers" aria-hidden="true"></canvas>
+    <div class="hero__smoke" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <p class="hero__eyebrow reveal">Est. in smoke. Reborn in Tupelo.</p>
+      <h1 class="hero__title">
+        <span class="hero__title-script reveal">Bob &amp; Barb's</span>
+        <span class="hero__title-slab reveal" data-delay="1">Barbecue &amp; Supper Club</span>
+      </h1>
+      <p class="hero__tag reveal" data-delay="2" id="heroTag">
+        Low-and-slow Mississippi 'cue by day. A candlelit supper club by night.
+      </p>
+
+      <div class="hero__cta reveal" data-delay="3">
+        <a href="#order" class="btn btn--ember">Order the Pit</a>
+        <a href="#reserve" class="btn btn--ghost">Reserve a Night</a>
+      </div>
+
+      <div class="hero__meta reveal" data-delay="4">
+        <span><strong>Now smokin'</strong> · Downtown Tupelo, MS</span>
+        <span class="hero__meta-dot">•</span>
+        <span id="heroHours">Pit open Tue–Sun, 11a &lsquo;til the meat runs out</span>
+      </div>
+    </div>
+
+    <a href="#story" class="hero__scroll" aria-label="Scroll down">
+      <span class="hero__scroll-line"></span>
+      <span class="hero__scroll-text">smell that?</span>
+    </a>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Brisket</span><span class="marquee__dot">🔥</span>
+      <span>Pulled Pork</span><span class="marquee__dot">🔥</span>
+      <span>St. Louis Ribs</span><span class="marquee__dot">🔥</span>
+      <span>Hot Links</span><span class="marquee__dot">🔥</span>
+      <span>Smoked Turkey</span><span class="marquee__dot">🔥</span>
+      <span>Burnt Ends</span><span class="marquee__dot">🔥</span>
+      <span>Banana Puddin'</span><span class="marquee__dot">🔥</span>
+      <!-- duplicate for seamless loop -->
+      <span>Brisket</span><span class="marquee__dot">🔥</span>
+      <span>Pulled Pork</span><span class="marquee__dot">🔥</span>
+      <span>St. Louis Ribs</span><span class="marquee__dot">🔥</span>
+      <span>Hot Links</span><span class="marquee__dot">🔥</span>
+      <span>Smoked Turkey</span><span class="marquee__dot">🔥</span>
+      <span>Burnt Ends</span><span class="marquee__dot">🔥</span>
+      <span>Banana Puddin'</span><span class="marquee__dot">🔥</span>
+    </div>
+  </div>
+
+  <!-- ============ STORY ============ -->
+  <section class="story section" id="story">
+    <div class="story__grid">
+      <div class="story__art reveal" aria-hidden="true">
+        <div class="story__art-frame">
+          <div class="story__art-smoke"></div>
+          <svg viewBox="0 0 200 200" class="story__pig" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="96" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+            <text x="100" y="118" font-size="84" text-anchor="middle">🐖</text>
+            <text x="100" y="172" font-size="13" letter-spacing="3" text-anchor="middle" fill="currentColor" font-family="Oswald, sans-serif">SINCE WAY BACK</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="story__copy">
+        <p class="kicker reveal">The Story</p>
+        <h2 class="reveal">Same name. Same fire. <em>New zip code.</em></h2>
+        <p class="reveal">
+          Bob &amp; Barb's started as a little smokehouse with a big reputation &mdash;
+          the kind of place where folks lined up before the doors opened and left
+          with sauce on their Sunday best. We packed up the pit, kept the recipes,
+          and rolled into <strong>downtown Tupelo</strong> to do it all over again.
+        </p>
+        <p class="reveal">
+          Everything's still done the only way that's ever made sense to us:
+          post-oak and hickory, salt and pepper, and <strong>time</strong> &mdash;
+          16 hours of it, give or take. No shortcuts. No microwaves. Just smoke
+          that knows your name.
+        </p>
+        <p class="reveal story__twist">
+          And on a few special weekend nights, we kill the lights, light the
+          candles, and the pit becomes <strong>a supper club</strong> &mdash;
+          white tablecloths, a chef's menu, and barbecue that wears a tie.
+        </p>
+
+        <div class="story__stats reveal">
+          <div class="stat"><span class="stat__num" data-count="16">0</span><span class="stat__label">hours in the pit</span></div>
+          <div class="stat"><span class="stat__num" data-count="3">0</span><span class="stat__label">woods, one fire</span></div>
+          <div class="stat"><span class="stat__num" data-count="1957">0</span><span class="stat__label">recipe vintage</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MENU ============ -->
+  <section class="menu section" id="menu">
+    <div class="section__head">
+      <p class="kicker reveal">The Goods</p>
+      <h2 class="reveal">The Menu</h2>
+      <p class="section__lede reveal">
+        Sold by the pound, the plate, or the sandwich. When it's gone, it's gone &mdash;
+        so don't dawdle.
+      </p>
+    </div>
+
+    <div class="menu__tabs reveal" id="menuTabs" role="tablist" aria-label="Menu categories">
+      <button class="menu__tab is-active" data-cat="pit" role="tab">From the Pit</button>
+      <button class="menu__tab" data-cat="plates" role="tab">Plates &amp; Sammies</button>
+      <button class="menu__tab" data-cat="sides" role="tab">Sides &amp; Fixin's</button>
+      <button class="menu__tab" data-cat="sweets" role="tab">Sweets</button>
+      <button class="menu__tab" data-cat="sips" role="tab">Sips</button>
+      <button class="menu__tab menu__tab--night" data-cat="supper" role="tab">Supper Club ✦</button>
+    </div>
+
+    <div class="menu__grid" id="menuGrid" role="tabpanel"><!-- JS injects items --></div>
+
+    <p class="menu__note reveal">
+      Prices are placeholders &mdash; swap in your real numbers in <code>js/main.js</code>.
+      Market items priced daily. Ask about the cut of the day.
+    </p>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="gallery section" id="gallery">
+    <div class="section__head">
+      <p class="kicker reveal">Eye Candy</p>
+      <h2 class="reveal">The Gallery</h2>
+      <p class="section__lede reveal">Smoke rings, char, and the good kind of mess.</p>
+    </div>
+
+    <div class="gallery__grid" id="galleryGrid"><!-- JS injects tiles --></div>
+  </section>
+
+  <!-- ============ ORDER ============ -->
+  <section class="order section" id="order">
+    <div class="order__inner">
+      <div class="order__copy">
+        <p class="kicker reveal">To Go</p>
+        <h2 class="reveal">Order the Pit</h2>
+        <p class="section__lede reveal">
+          Pickup &amp; curbside in downtown Tupelo. Tap a crowd-pleaser to start a tray,
+          then send it to the kitchen.
+        </p>
+
+        <ol class="order__steps reveal">
+          <li><span>1</span> Build your tray below (or browse the full menu)</li>
+          <li><span>2</span> Pick it up hot at <strong>the downtown counter</strong></li>
+          <li><span>3</span> Catering &amp; by-the-pound? <a href="#visit">Holler at us</a></li>
+        </ol>
+      </div>
+
+      <div class="order__builder reveal">
+        <h3 class="order__builder-title">Quick Tray</h3>
+        <div class="order__items" id="orderItems"><!-- JS injects quick items --></div>
+
+        <div class="order__summary">
+          <div class="order__summary-line">
+            <span>Your tray</span>
+            <span id="orderCount">0 items</span>
+          </div>
+          <div class="order__summary-total">
+            <span>Subtotal</span>
+            <span id="orderTotal">$0.00</span>
+          </div>
+          <a href="#" class="btn btn--ember btn--block" id="orderSend">Send to the Kitchen</a>
+          <p class="order__fineprint">
+            Demo cart &mdash; wire <code>#orderSend</code> to Toast, Square, or
+            ChowNow for live online ordering.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESERVE / SUPPER CLUB ============ -->
+  <section class="reserve section" id="reserve">
+    <div class="reserve__glow" aria-hidden="true"></div>
+    <div class="reserve__inner">
+      <div class="reserve__copy">
+        <p class="kicker kicker--gold reveal">After Dark</p>
+        <h2 class="reveal">The <em>Supper Club</em></h2>
+        <p class="section__lede reveal">
+          A handful of nights a season, the pit puts on its good jacket. One seating,
+          one chef's menu, candlelight and vinyl. Reservations only &mdash; and they go fast.
+        </p>
+
+        <ul class="reserve__events reveal" id="reserveEvents"><!-- JS injects events --></ul>
+      </div>
+
+      <form class="reserve__form reveal" id="reserveForm" novalidate>
+        <h3 class="reserve__form-title">Reserve Your Seats</h3>
+
+        <div class="field">
+          <label for="rName">Name</label>
+          <input id="rName" name="name" type="text" required placeholder="Who's joining us?" />
+        </div>
+
+        <div class="field field--row">
+          <div>
+            <label for="rEmail">Email</label>
+            <input id="rEmail" name="email" type="email" required placeholder="you@email.com" />
+          </div>
+          <div>
+            <label for="rPhone">Phone</label>
+            <input id="rPhone" name="phone" type="tel" placeholder="(662) 555‑0123" />
+          </div>
+        </div>
+
+        <div class="field field--row">
+          <div>
+            <label for="rEvent">Night</label>
+            <select id="rEvent" name="event" required></select>
+          </div>
+          <div>
+            <label for="rParty">Party of</label>
+            <select id="rParty" name="party" required>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9+">9+ (call us)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="rNotes">Anything we should know?</label>
+          <textarea id="rNotes" name="notes" rows="2" placeholder="Allergies, celebrations, a hankering..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn--gold btn--block">Request a Table</button>
+        <p class="reserve__formnote" id="reserveNote" role="status">
+          We'll confirm by email within a day. Seats are held with a card &mdash;
+          connect a real booking service (Resy, Tock, OpenTable) here.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ VISIT / CONTACT ============ -->
+  <section class="visit section" id="visit">
+    <div class="section__head">
+      <p class="kicker reveal">Come On In</p>
+      <h2 class="reveal">Visit Us</h2>
+    </div>
+
+    <div class="visit__grid">
+      <div class="visit__card reveal">
+        <h3>The Pit · Daytime</h3>
+        <ul class="visit__hours">
+          <li><span>Mon</span><span class="visit__closed">Restin' the fire</span></li>
+          <li><span>Tue – Thu</span><span>11:00a – 8:00p</span></li>
+          <li><span>Fri – Sat</span><span>11:00a – 9:00p</span></li>
+          <li><span>Sun</span><span>11:00a – 3:00p</span></li>
+        </ul>
+        <p class="visit__smallnote">We sell out. Earlier is better.</p>
+      </div>
+
+      <div class="visit__card visit__card--night reveal">
+        <h3>The Supper Club · Nights ✦</h3>
+        <p>Select Friday &amp; Saturday evenings. One seating at 7:00p.</p>
+        <p>By reservation only.</p>
+        <a href="#reserve" class="btn btn--gold btn--sm">See the Calendar</a>
+      </div>
+
+      <div class="visit__card visit__card--find reveal">
+        <h3>Find Us</h3>
+        <address>
+          123 Main Street<br />
+          Downtown Tupelo, MS 38804
+        </address>
+        <p>
+          <a href="tel:+16625550123">(662) 555‑0123</a><br />
+          <a href="mailto:howdy@bobandbarbs.com">howdy@bobandbarbs.com</a>
+        </p>
+        <div class="visit__socials">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+        </div>
+        <a class="btn btn--ghost btn--sm" href="https://maps.google.com/?q=Downtown+Tupelo+MS" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </div>
+
+    <div class="visit__map reveal" aria-hidden="true">
+      <div class="visit__map-pin">📍 Downtown Tupelo</div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="footer__script">Bob &amp; Barb's</span>
+        <p>Barbecue &amp; Supper Club · Downtown Tupelo, Mississippi</p>
+      </div>
+
+      <form class="footer__news" id="newsForm">
+        <label for="newsEmail">Get the word on Supper Club nights</label>
+        <div class="footer__news-row">
+          <input id="newsEmail" type="email" placeholder="you@email.com" required />
+          <button class="btn btn--ember btn--sm" type="submit">Sign Me Up</button>
+        </div>
+        <p class="footer__news-note" id="newsNote" role="status"></p>
+      </form>
+
+      <nav class="footer__links" aria-label="Footer">
+        <a href="#menu">Menu</a>
+        <a href="#order">Order</a>
+        <a href="#reserve">Supper Club</a>
+        <a href="#visit">Visit</a>
+      </nav>
+    </div>
+    <p class="footer__legal">
+      © <span id="year"></span> Bob &amp; Barb's. May all your meat dreams come true. ·
+      Made with smoke in Tupelo.
+    </p>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous">‹</button>
+    <figure class="lightbox__figure">
+      <div class="lightbox__img" id="lightboxImg"></div>
+      <figcaption id="lightboxCap"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next">›</button>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
