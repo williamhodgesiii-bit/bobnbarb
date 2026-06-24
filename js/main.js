@@ -658,18 +658,9 @@
       w = cv.width = cv.offsetWidth * devicePixelRatio;
       h = cv.height = cv.offsetHeight * devicePixelRatio;
     }
-    // most embers rise from the bottom corners (where the "fire" is)
-    function spawnX() {
-      if (Math.random() < 0.62) {
-        const side = Math.random() < 0.5 ? 0 : 1;
-        const off = Math.pow(Math.random(), 1.6) * w * 0.34;
-        return side ? w - off : off;
-      }
-      return Math.random() * w;
-    }
     function spawn() {
       return {
-        x: spawnX(),
+        x: Math.random() * w,
         y: h + Math.random() * h * 0.4,
         r: (Math.random() * 2.4 + 0.8) * devicePixelRatio,
         vy: (Math.random() * 0.7 + 0.3) * devicePixelRatio,
