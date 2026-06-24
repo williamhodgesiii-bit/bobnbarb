@@ -530,6 +530,75 @@ body.is-night .order__step button:hover { color: #1a120a; }
 .reserve__formnote { font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.9rem; text-align: center; }
 .reserve__formnote.success { color: var(--teal); font-weight: 600; }
 
+/* ---------- RESERVE: AVAILABILITY CALENDAR ---------- */
+.reserve__cal {
+  margin-top: 1.8rem; max-width: 430px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius-lg); padding: 1.2rem 1.3rem 1.4rem; box-shadow: var(--shadow-sm);
+}
+.reserve__cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.reserve__cal-month { font-family: var(--font-serif); font-weight: 700; font-size: 1.2rem; }
+.reserve__cal-head button {
+  width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--line);
+  background: transparent; color: var(--accent); font-size: 1.2rem; line-height: 1; cursor: pointer;
+  display: grid; place-items: center; transition: 0.2s;
+}
+.reserve__cal-head button:hover:not(:disabled) { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 14%, transparent); }
+.reserve__cal-head button:disabled { opacity: 0.3; cursor: default; }
+.reserve__cal-dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 6px; }
+.reserve__cal-dow span { text-align: center; font-family: var(--font-disp); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.62rem; color: var(--ink-soft); }
+.reserve__cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.cal-cell {
+  aspect-ratio: 1; display: grid; place-items: center; border-radius: 9px;
+  font-family: var(--font-disp); font-size: 0.84rem; color: var(--ink-soft); position: relative;
+}
+.cal-cell--empty { visibility: hidden; }
+.cal-cell--past { opacity: 0.3; }
+.cal-cell--event {
+  cursor: pointer; color: var(--ink); font-weight: 600;
+  border: 1.5px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  background: color-mix(in srgb, var(--gold) 9%, transparent);
+  transition: transform 0.2s var(--ease), border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.cal-cell--event:hover { transform: translateY(-2px); border-color: var(--gold); }
+.cal-cell__dot { position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; }
+.cal-cell--event.open .cal-cell__dot { background: var(--teal); }
+.cal-cell--event.few  .cal-cell__dot { background: var(--ember); }
+.cal-cell--event.full { opacity: 0.55; }
+.cal-cell--event.full .cal-cell__dot { background: var(--ink-soft); }
+.cal-cell--event.is-selected {
+  background: linear-gradient(135deg, var(--gold), var(--gold-lo)); color: #1a120a; border-color: var(--gold);
+  box-shadow: 0 8px 20px -8px color-mix(in srgb, var(--gold) 70%, transparent);
+}
+.cal-cell--event.is-selected .cal-cell__dot { background: #1a120a; }
+.reserve__cal-legend { display: flex; gap: 1.1rem; flex-wrap: wrap; margin-top: 1rem; font-family: var(--font-disp); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.62rem; color: var(--ink-soft); }
+.reserve__cal-legend i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+.reserve__cal-legend .open { background: var(--teal); }
+.reserve__cal-legend .few { background: var(--ember); }
+.reserve__cal-legend .full { background: var(--ink-soft); }
+
+/* selected-night detail / booking panel */
+.reserve__detail {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2.2rem); box-shadow: var(--shadow); align-self: start; position: sticky; top: 92px;
+}
+.reserve__detail-date { display: flex; flex-direction: column; line-height: 1; margin-bottom: 0.7rem; }
+.reserve__detail-dow { font-family: var(--font-disp); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem; color: var(--gold); }
+.reserve__detail-d { font-family: var(--font-slab); font-size: 3.4rem; color: var(--ink); line-height: 0.9; }
+.reserve__detail-mo { font-family: var(--font-disp); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.74rem; color: var(--ink-soft); }
+.reserve__detail-title { font-family: var(--font-serif); font-weight: 700; font-size: 1.5rem; margin-top: 0.5rem; }
+.reserve__detail-sub { color: var(--ink-soft); margin: 0.3rem 0 1rem; }
+.reserve__detail-status { display: inline-block; font-family: var(--font-disp); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.66rem; padding: 0.28rem 0.75rem; border-radius: 100px; margin-bottom: 1.1rem; }
+.reserve__detail-status.open { background: color-mix(in srgb, var(--teal) 22%, transparent); color: var(--teal); }
+.reserve__detail-status.few { background: color-mix(in srgb, var(--ember) 22%, transparent); color: var(--ember); }
+.reserve__detail-status.full { background: color-mix(in srgb, var(--ink) 14%, transparent); color: var(--ink-soft); }
+.reserve__seats { margin-bottom: 1.3rem; }
+.reserve__seats-bar { height: 8px; border-radius: 100px; background: color-mix(in srgb, var(--ink) 12%, transparent); overflow: hidden; }
+.reserve__seats-bar span { display: block; height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--gold), var(--gold-lo)); transition: width 0.5s var(--ease); }
+.reserve__seats-label { font-family: var(--font-disp); letter-spacing: 0.04em; font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.55rem; }
+.reserve__detail-note { font-size: 0.75rem; color: var(--ink-soft); text-align: center; margin-top: 0.9rem; }
+.reserve__detail-empty { color: var(--ink-soft); text-align: center; padding: 2.5rem 1rem; font-family: var(--font-serif); font-style: italic; }
+
 /* ---------- CATERING ---------- */
 .catering { background: var(--char); color: var(--cream); }
 body.is-night .catering { background: var(--bg-2); }

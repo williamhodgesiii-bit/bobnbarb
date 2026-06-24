@@ -83,12 +83,15 @@
     { e: '🥬', n: 'Side (single)',        p: 3  },
   ];
 
-  // Upcoming Supper Club nights
+  // Open Supper Club nights — calendar-driven by date + seats.
+  // (Seed data; swap in real open dates / live seat counts later.)
+  //   date  = ISO night, seats = seats still open, total = seats in the room
   const EVENTS = [
-    { d: '12', m: 'JUL', title: 'Whole-Hog & Bourbon',   sub: 'Five courses · vinyl & candlelight', status: 'few',  label: 'A few left' },
-    { d: '26', m: 'JUL', title: 'Smoke & Sea',           sub: 'Coastal Mississippi meets the pit',   status: 'open', label: 'Booking' },
-    { d: '09', m: 'AUG', title: "Pitmaster's Table",     sub: 'Chef\'s counter · 8 seats only',      status: 'full', label: 'Sold out' },
-    { d: '23', m: 'AUG', title: 'Harvest Supper',        sub: 'Late-summer produce · wine pairings',  status: 'open', label: 'Booking' },
+    { date: '2026-07-12', title: 'Whole-Hog & Bourbon', sub: 'Five courses · vinyl & candlelight', seats: 5,  total: 24 },
+    { date: '2026-07-26', title: 'Smoke & Sea',         sub: 'Coastal Mississippi meets the pit',   seats: 16, total: 24 },
+    { date: '2026-08-09', title: "Pitmaster's Table",   sub: "Chef's counter · 8 seats only",        seats: 0,  total: 8  },
+    { date: '2026-08-23', title: 'Harvest Supper',      sub: 'Late-summer produce · wine pairings',  seats: 18, total: 24 },
+    { date: '2026-09-13', title: 'Cellar Dinner',       sub: 'Reserve-list pours · six courses',     seats: 22, total: 24 },
   ];
 
   // Gallery tiles — real shots from the @bnbqn2 feed. (Swap/add your own in assets/gallery/.)
@@ -392,51 +395,129 @@
   }));
 
   /* ---------------------------------------------------------
-     5. RESERVATIONS — events + form
+     5. RESERVATIONS — availability calendar (open dates + seats)
      --------------------------------------------------------- */
-  const eventsEl = $('#reserveEvents');
-  const eventSelect = $('#rEvent');
-  eventsEl.innerHTML = EVENTS.map(ev => `
-    <li class="reserve__event">
-      <div class="reserve__event-date"><b>${ev.d}</b><span>${ev.m}</span></div>
-      <div class="reserve__event-info"><h4>${ev.title}</h4><p>${ev.sub}</p></div>
-      <span class="reserve__event-status ${ev.status}">${ev.label}</span>
-    </li>`).join('');
-  eventSelect.innerHTML = EVENTS
-    .filter(ev => ev.status !== 'full')
-    .map(ev => `<option value="${ev.m} ${ev.d} — ${ev.title}">${ev.m} ${ev.d} — ${ev.title}</option>`)
-    .join('') || '<option>No nights open — join the list below</option>';
+  const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const calToday = new Date(); calToday.setHours(0, 0, 0, 0);
 
-  const reserveForm = $('#reserveForm');
-  const reserveNote = $('#reserveNote');
-  reserveForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let ok = true;
-    ['rName', 'rEmail'].forEach(id => {
-      const f = $('#' + id);
-      const bad = !f.value.trim() || (f.type === 'email' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value));
-      f.classList.toggle('invalid', bad);
-      if (bad) ok = false;
-    });
-    if (!ok) { reserveNote.textContent = 'Mind the highlighted fields, please.'; reserveNote.className = 'reserve__formnote'; return; }
-    // Hand the booking off to Resy if a link is configured.
-    if (openService(RESY_RESERVE_URL)) {
-      reserveNote.textContent = 'Opening Resy to finish your reservation…';
-      reserveNote.className = 'reserve__formnote success';
+  // derive a status (and label) from how many seats remain
+  const seatStatus = (ev) => {
+    if (ev.seats <= 0) return { key: 'full', label: 'Sold out' };
+    if (ev.seats <= Math.max(2, Math.round(ev.total * 0.25))) return { key: 'few', label: `Few left` };
+    return { key: 'open', label: 'Booking' };
+  };
+
+  // index events by day, and find the month range to page through
+  const evByDay = {};
+  EVENTS.forEach(ev => {
+    ev._d = new Date(ev.date + 'T00:00:00');
+    evByDay[`${ev._d.getFullYear()}-${ev._d.getMonth()}-${ev._d.getDate()}`] = ev;
+  });
+  const sortedEv = [...EVENTS].sort((a, b) => a._d - b._d);
+  const monthIdx = (y, m) => y * 12 + m;
+  const minMonth = monthIdx(sortedEv[0]._d.getFullYear(), sortedEv[0]._d.getMonth());
+  const maxMonth = monthIdx(sortedEv[sortedEv.length - 1]._d.getFullYear(), sortedEv[sortedEv.length - 1]._d.getMonth());
+
+  const calGrid = $('#calGrid');
+  const calMonthEl = $('#calMonth');
+  const calPrev = $('#calPrev');
+  const calNext = $('#calNext');
+  const detailEl = $('#reserveDetail');
+
+  // start on the first night that still has seats (or the first night)
+  const firstOpen = sortedEv.find(e => e.seats > 0) || sortedEv[0];
+  let viewY = firstOpen._d.getFullYear();
+  let viewM = firstOpen._d.getMonth();
+  let selectedKey = `${viewY}-${viewM}-${firstOpen._d.getDate()}`;
+
+  function renderCal() {
+    const idx = monthIdx(viewY, viewM);
+    calPrev.disabled = idx <= minMonth;
+    calNext.disabled = idx >= maxMonth;
+    calMonthEl.textContent = `${MONTH_NAMES[viewM]} ${viewY}`;
+    const firstDow = new Date(viewY, viewM, 1).getDay();
+    const daysIn = new Date(viewY, viewM + 1, 0).getDate();
+    let cells = '';
+    for (let i = 0; i < firstDow; i++) cells += `<span class="cal-cell cal-cell--empty"></span>`;
+    for (let d = 1; d <= daysIn; d++) {
+      const key = `${viewY}-${viewM}-${d}`;
+      const ev = evByDay[key];
+      if (ev) {
+        const st = seatStatus(ev);
+        const sel = key === selectedKey ? ' is-selected' : '';
+        cells += `<button type="button" class="cal-cell cal-cell--event ${st.key}${sel}" data-key="${key}"
+          aria-label="${MONTH_NAMES[viewM]} ${d} — ${ev.title}, ${st.label}">
+          <span class="cal-cell__num">${d}</span><span class="cal-cell__dot"></span></button>`;
+      } else {
+        const past = new Date(viewY, viewM, d) < calToday;
+        cells += `<span class="cal-cell${past ? ' cal-cell--past' : ''}">${d}</span>`;
+      }
+    }
+    calGrid.innerHTML = cells;
+  }
+
+  function renderDetail() {
+    const ev = selectedKey ? evByDay[selectedKey] : null;
+    if (!ev) {
+      detailEl.innerHTML = `<p class="reserve__detail-empty">Pick a highlighted night to see availability.</p>`;
       return;
     }
-    const name = $('#rName').value.trim().split(' ')[0];
-    reserveNote.textContent = `🥂 Thank you, ${name}! Your request is in — we’ll confirm by email. (Add your Resy link to book instantly.)`;
-    reserveNote.className = 'reserve__formnote success';
-    reserveForm.reset();
-    toast('Table requested — check your inbox soon!');
+    const st = seatStatus(ev);
+    const d = ev._d;
+    const soldout = ev.seats <= 0;
+    const pct = Math.max(0, Math.min(100, Math.round((ev.seats / ev.total) * 100)));
+    detailEl.innerHTML = `
+      <div class="reserve__detail-date">
+        <span class="reserve__detail-dow">${DAY_NAMES[d.getDay()]}</span>
+        <span class="reserve__detail-d">${d.getDate()}</span>
+        <span class="reserve__detail-mo">${MONTH_NAMES[d.getMonth()].slice(0, 3)} ${d.getFullYear()}</span>
+      </div>
+      <h3 class="reserve__detail-title">${ev.title}</h3>
+      <p class="reserve__detail-sub">${ev.sub}</p>
+      <span class="reserve__detail-status ${st.key}">${st.label}</span>
+      <div class="reserve__seats">
+        <div class="reserve__seats-bar"><span style="width:${pct}%"></span></div>
+        <p class="reserve__seats-label">${soldout ? 'No seats remaining' : `${ev.seats} of ${ev.total} seats left`} · one seating at 7:00p</p>
+      </div>
+      ${soldout
+        ? `<a class="btn btn--ghost btn--block" href="#newsForm">Join the waitlist</a>`
+        : `<a class="btn btn--gold btn--block" href="#" data-resy>Reserve on Resy</a>`}
+      <p class="reserve__detail-note">${soldout
+        ? 'Cancellations open up — get on the list and we’ll holler.'
+        : 'Confirmed instantly through Resy · seats held with a card.'}</p>`;
+  }
+
+  function selectDay(key) { selectedKey = key; renderCal(); renderDetail(); }
+
+  calGrid.addEventListener('click', (e) => {
+    const cell = e.target.closest('.cal-cell--event');
+    if (cell) selectDay(cell.dataset.key);
+  });
+  calPrev.addEventListener('click', () => {
+    if (monthIdx(viewY, viewM) <= minMonth) return;
+    if (--viewM < 0) { viewM = 11; viewY--; }
+    renderCal();
+  });
+  calNext.addEventListener('click', () => {
+    if (monthIdx(viewY, viewM) >= maxMonth) return;
+    if (++viewM > 11) { viewM = 0; viewY++; }
+    renderCal();
   });
 
-  // "Reserve on Resy" buttons jump straight to Resy when a link is set.
-  $$('[data-resy]').forEach(btn => btn.addEventListener('click', (e) => {
+  renderCal();
+  renderDetail();
+
+  // Any "Reserve on Resy" button (hero + the dynamically rendered detail one)
+  // hands off to Resy when a link is configured. Delegated so it covers
+  // buttons injected after load.
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-resy]');
+    if (!btn) return;
     if (openService(RESY_RESERVE_URL)) { e.preventDefault(); return; }
-    toast('Resy booking is coming soon — fill out the form or call 662-801-5181.');
-  }));
+    e.preventDefault();
+    toast('Resy booking is coming soon — call 662-801-5181 to reserve your seats.');
+  });
 
   /* ---------------------------------------------------------
      6. GALLERY + LIGHTBOX

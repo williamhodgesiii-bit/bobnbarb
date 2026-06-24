@@ -280,66 +280,29 @@
         <h2 class="reveal">The <em>Supper Club</em></h2>
         <p class="section__lede reveal">
           A handful of nights a season, the pit puts on its good jacket. One seating,
-          one chef's menu, candlelight and vinyl. Reservations only &mdash; and they go fast.
+          one chef's menu, candlelight and vinyl. Pick an open night below &mdash;
+          seats go fast.
         </p>
 
-        <ul class="reserve__events reveal" id="reserveEvents"><!-- JS injects events --></ul>
-
-        <a href="#reserveForm" class="btn btn--gold reserve__resy reveal" data-resy>
-          Reserve on Resy <span aria-hidden="true">→</span>
-        </a>
+        <div class="reserve__cal reveal" id="reserveCal">
+          <div class="reserve__cal-head">
+            <button type="button" id="calPrev" aria-label="Previous month">‹</button>
+            <span class="reserve__cal-month" id="calMonth" aria-live="polite"></span>
+            <button type="button" id="calNext" aria-label="Next month">›</button>
+          </div>
+          <div class="reserve__cal-dow" aria-hidden="true">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+          <div class="reserve__cal-grid" id="calGrid" role="grid" aria-label="Supper Club nights"><!-- JS --></div>
+          <div class="reserve__cal-legend">
+            <span><i class="open"></i> Booking</span>
+            <span><i class="few"></i> Few left</span>
+            <span><i class="full"></i> Sold out</span>
+          </div>
+        </div>
       </div>
 
-      <form class="reserve__form reveal" id="reserveForm" novalidate>
-        <h3 class="reserve__form-title">Reserve Your Seats</h3>
-
-        <div class="field">
-          <label for="rName">Name</label>
-          <input id="rName" name="name" type="text" required placeholder="Who's joining us?" />
-        </div>
-
-        <div class="field field--row">
-          <div>
-            <label for="rEmail">Email</label>
-            <input id="rEmail" name="email" type="email" required placeholder="you@email.com" />
-          </div>
-          <div>
-            <label for="rPhone">Phone</label>
-            <input id="rPhone" name="phone" type="tel" placeholder="(662) 555‑0123" />
-          </div>
-        </div>
-
-        <div class="field field--row">
-          <div>
-            <label for="rEvent">Night</label>
-            <select id="rEvent" name="event" required></select>
-          </div>
-          <div>
-            <label for="rParty">Party of</label>
-            <select id="rParty" name="party" required>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9+">9+ (call us)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="rNotes">Anything we should know?</label>
-          <textarea id="rNotes" name="notes" rows="2" placeholder="Allergies, celebrations, a hankering..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn--gold btn--block">Reserve on Resy</button>
-        <p class="reserve__formnote" id="reserveNote" role="status">
-          Booked instantly through <strong>Resy</strong>. Add your Resy link in
-          <code>js/main.js</code> (<code>RESY_RESERVE_URL</code>) to go live.
-        </p>
-      </form>
+      <aside class="reserve__detail reveal" id="reserveDetail" aria-live="polite"><!-- JS injects selected night --></aside>
     </div>
   </section>
 

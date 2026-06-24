@@ -26,8 +26,10 @@ a sleek high-end palette. Online ordering is hidden after dark.
   (The Tasting, Caviar & Raw, First Courses, From the Hearth, Sweets, The Cellar).
 - **Quick-Tray order builder** — a demo cart (daytime only) wired to a
   configurable Toast online-ordering link.
-- **Supper Club reservations** — upcoming-nights list with availability badges
-  and a validated booking form (ready for Resy / Tock / OpenTable).
+- **Supper Club availability calendar** — a month-by-month calendar driven by
+  open dates and live seat counts (status: booking / few left / sold out).
+  Pick a night to see seats remaining and book through Resy (sold-out nights
+  offer a waitlist instead). Edit the `EVENTS` array (date + seats + total).
 - **Masonry gallery** with a keyboard-navigable lightbox.
 - Scroll-reveal animations, count-up stats, a hover-pausing marquee, mobile nav,
   newsletter signup, and a "smell that?" scroll cue.
