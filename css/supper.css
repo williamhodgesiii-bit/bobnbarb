@@ -220,12 +220,14 @@ body.supper::after {
 .cal-cell { aspect-ratio: 1; display: grid; place-items: center; font-family: var(--sans); font-size: 0.82rem; color: var(--muted); position: relative; }
 .cal-cell--empty { visibility: hidden; }
 .cal-cell--past { opacity: 0.28; }
-.cal-cell--event { cursor: pointer; color: var(--ivory); border: 1px solid var(--hair); transition: 0.25s var(--ease); }
-.cal-cell--event:hover { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 10%, transparent); }
+/* explicit background: <button> defaults to a light UA "buttonface", which
+   otherwise whites out the cell and hides the ivory date text */
+.cal-cell--event { cursor: pointer; color: var(--ivory); background: rgba(224,189,122,0.07); border: 1px solid var(--hair); transition: 0.25s var(--ease); }
+.cal-cell--event:hover { border-color: var(--gold); background: rgba(224,189,122,0.17); }
 .cal-cell__dot { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; }
 .cal-cell--event.open .cal-cell__dot { background: var(--gold); }
 .cal-cell--event.few .cal-cell__dot  { background: #d98a4a; }
-.cal-cell--event.full { opacity: 0.4; }
+.cal-cell--event.full { opacity: 0.45; background: transparent; }
 .cal-cell--event.full .cal-cell__dot { background: var(--muted); }
 .cal-cell--event.sel { background: var(--gold); color: #14110b; border-color: var(--gold); }
 .cal-cell--event.sel .cal-cell__dot { background: #14110b; }
