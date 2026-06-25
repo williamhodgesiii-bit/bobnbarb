@@ -201,13 +201,34 @@ body.pit .grain { mix-blend-mode: multiply; }
    ========================================================= */
 .story { background: var(--paper); }
 .story__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.story__photo { position: relative; }
-.story__photo img { width: 100%; border-radius: 4px; box-shadow: var(--shadow); border: 6px solid #fff; }
-.story__photo::after {
-  content: 'EST. TUPELO, MS'; position: absolute; bottom: -14px; right: 18px;
+/* a little scrapbook cluster — the folks out front, the sign tucked behind */
+.story__photo { position: relative; padding: clamp(1rem, 3vw, 2rem) 0; }
+.snap { background: #fff; padding: 8px; border-radius: 3px; box-shadow: var(--shadow); }
+.snap img { width: 100%; height: auto; border-radius: 1px; display: block; background: var(--char-2); }
+.story__photo .snap--couple {
+  position: relative; z-index: 2; width: 64%; margin-left: 2%; padding-bottom: 0;
+  transform: rotate(-2deg); transition: transform 0.4s var(--ease);
+}
+.story__photo:hover .snap--couple { transform: rotate(-0.6deg); }
+/* show the portrait as a tidy square framed on their faces — echoes the gallery */
+.snap--couple img { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 18%; }
+.snap__cap {
+  font-family: var(--script); color: var(--brick); text-align: center;
+  font-size: clamp(1.5rem, 3.2vw, 1.95rem); line-height: 1; padding: 0.5rem 0 0.6rem;
+}
+.snap__cap span {
+  display: block; font-family: var(--cond); text-transform: uppercase;
+  letter-spacing: 0.2em; font-size: 0.56rem; color: var(--ink-2); margin-top: 0.4rem;
+}
+.story__photo .snap--sign {
+  position: absolute; z-index: 1; top: 11%; right: 0; width: 46%;
+  padding: 6px; transform: rotate(3.5deg); box-shadow: var(--shadow-s);
+}
+.story__photo .snap--sign::after {
+  content: 'EST. TUPELO, MS'; position: absolute; right: 8px; bottom: -10px;
   background: var(--ink); color: var(--cream); font-family: var(--cond);
-  text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.66rem; padding: 0.4rem 0.8rem;
-  transform: rotate(-2deg); box-shadow: var(--shadow-s);
+  text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.6rem; padding: 0.35rem 0.7rem;
+  transform: rotate(-2.5deg); box-shadow: var(--shadow-s);
 }
 .story__copy h2 { margin: 0.7rem 0 1.2rem; }
 .story__copy p { color: var(--ink-2); margin-bottom: 1.05rem; max-width: 54ch; }
@@ -472,8 +493,11 @@ body.pit .grain { mix-blend-mode: multiply; }
 
   /* story */
   .story__grid { gap: 1.5rem; }
-  .story__photo img { border-width: 4px; }
-  .story__photo::after { font-size: 0.6rem; bottom: -11px; right: 12px; }
+  .story__photo { padding: 1.1rem 0; }
+  .snap { padding: 6px; }
+  .snap__cap { font-size: 1.5rem; padding: 0.4rem 0 0.5rem; }
+  .story__photo .snap--sign { right: 3%; width: 44%; }
+  .story__photo .snap--sign::after { font-size: 0.54rem; letter-spacing: 0.1em; right: 6px; bottom: -8px; }
   .story__copy h2 { margin: 0.4rem 0 0.85rem; }
   .story__quote { font-size: 1.6rem; margin-top: 1.2rem; }
 
