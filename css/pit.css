@@ -89,29 +89,28 @@ body.pit .grain { mix-blend-mode: multiply; }
 .nav {
   position: fixed; inset: 0 0 auto 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: 1rem clamp(1.2rem, 5vw, 3rem);
-  transition: background 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s, border-color 0.4s;
+  padding: 1.1rem clamp(1.2rem, 5vw, 3rem);
+  background: var(--paper);                 /* solid butcher-paper bar from the start */
   border-bottom: 1px solid transparent;
+  transition: background 0.4s var(--ease), padding 0.4s var(--ease), box-shadow 0.4s, border-color 0.4s;
 }
+/* on scroll: a little flourish — frost it, lift it, and condense it */
 .nav.stuck {
-  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
   backdrop-filter: blur(12px) saturate(1.1);
   border-bottom-color: var(--line);
   box-shadow: var(--shadow-s);
   padding-top: 0.6rem; padding-bottom: 0.6rem;
 }
 .brand { display: flex; align-items: baseline; gap: 0.5rem; }
-.brand__script { font-family: var(--script); font-size: 1.7rem; color: var(--cream); line-height: 1; transition: color 0.4s; }
-.nav.stuck .brand__script { color: var(--brick); }
-.brand__sub { font-family: var(--cond); text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.58rem; color: var(--cream-dim); transition: color 0.4s; }
-.nav.stuck .brand__sub { color: var(--ink-2); }
+.brand__script { font-family: var(--script); font-size: 1.7rem; color: var(--brick); line-height: 1; }
+.brand__sub { font-family: var(--cond); text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.58rem; color: var(--ink-2); }
 
 .nav__links { display: flex; align-items: center; gap: 1.5rem; }
 .nav__links a {
   font-family: var(--cond); text-transform: uppercase; letter-spacing: 0.1em;
-  font-size: 0.8rem; color: var(--cream); position: relative; padding: 0.25rem 0; transition: color 0.25s;
+  font-size: 0.8rem; color: var(--ink); position: relative; padding: 0.25rem 0; transition: color 0.25s;
 }
-.nav.stuck .nav__links a { color: var(--ink); }
 .nav__links a::after { content: ''; position: absolute; left: 0; bottom: -3px; height: 2px; width: 0; background: var(--brick); transition: width 0.3s var(--ease); }
 .nav__links a:hover::after { width: 100%; }
 .nav__links a.is-current::after { width: 100%; }
@@ -128,8 +127,7 @@ body.pit .grain { mix-blend-mode: multiply; }
 .nav__order:hover { background: var(--brick-dk); }
 
 .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; z-index: 110; }
-.burger span { width: 26px; height: 2px; background: var(--cream); transition: 0.35s var(--ease); }
-.nav.stuck .burger span { background: var(--ink); }
+.burger span { width: 26px; height: 2px; background: var(--ink); transition: 0.35s var(--ease); }
 .burger.open span { background: var(--ink); }
 .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .burger.open span:nth-child(2) { opacity: 0; }

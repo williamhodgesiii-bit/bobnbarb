@@ -16,7 +16,12 @@
     { n: 'Side (single)',        p: 3  },
   ];
 
-  /* ---------- NAV (drawer only; bar stays stuck on this page) ---------- */
+  /* ---------- NAV: solid from the top, frosted-condense on scroll ---------- */
+  const nav = $('#nav');
+  const setStuck = () => nav.classList.toggle('stuck', window.scrollY > 30);
+  setStuck();
+  window.addEventListener('scroll', setStuck, { passive: true });
+
   const burger = $('#burger');
   const links = $('#navLinks');
   const toggle = (open) => {
