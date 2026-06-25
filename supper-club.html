@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Supper Club — Bob &amp; Barb's · Downtown Tupelo, MS</title>
-  <meta name="description" content="The Supper Club at Bob & Barb's: a candlelit, reservation-only evening in downtown Tupelo. One seating, a seven-course Mississippi tasting menu, and a reserve cellar. By reservation." />
+  <meta name="description" content="The Supper Club at Bob & Barb's: a candlelit, reservation-only evening in downtown Tupelo. One seating, a seven-course tasting, and a reserve cellar. By invitation." />
   <meta property="og:title" content="The Supper Club — Bob &amp; Barb's" />
-  <meta property="og:description" content="A candlelit, reservation-only evening in downtown Tupelo. One seating. A seven-course Mississippi tasting." />
+  <meta property="og:description" content="A candlelit, reservation-only evening. One seating. A seven-course tasting. By invitation." />
   <meta property="og:type" content="restaurant" />
-  <meta name="theme-color" content="#0a0908" />
+  <meta name="theme-color" content="#0e0a07" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,15 +19,14 @@
   <link rel="manifest" href="manifest.webmanifest" />
 </head>
 <body class="supper">
-  <a href="#table" class="skip">Skip to the menu</a>
+  <a href="#reserve" class="skip">Skip to reservations</a>
   <div class="grain" aria-hidden="true"></div>
 
   <!-- ============ NAV ============ -->
   <header class="snav" id="snav">
     <nav class="snav__links" id="snavLinks" aria-label="Primary">
-      <a href="#evening">The Evening</a>
-      <a href="#table">The Table</a>
       <a href="#reserve">Reserve</a>
+      <a href="#table">The Table</a>
       <a href="index.html" class="snav__pit">The Pit <span aria-hidden="true">↗</span></a>
     </nav>
     <a href="#top" class="sbrand" id="top" aria-label="Bob and Barb's Supper Club">
@@ -47,81 +46,27 @@
     <div class="shero__photo" data-anim aria-hidden="true"></div>
     <div class="shero__veil" aria-hidden="true"></div>
     <div class="shero__inner">
-      <p class="label reveal">By reservation · Downtown Tupelo</p>
-      <div class="hairrule reveal d1"></div>
+      <p class="label reveal">By reservation · Members &amp; guests</p>
+      <div class="flourish reveal d1"><span aria-hidden="true">✦</span></div>
       <h1 class="shero__name reveal d1">An invitation,</h1>
       <p class="shero__sub reveal d2">after dark</p>
       <p class="shero__tag reveal d2">
-        A few nights a season, the pit cools and the candles come up.
+        A few nights a season the pit cools, the candles come up, and the room
+        belongs to a handful of guests.
       </p>
-      <a href="#reserve" class="gbtn reveal d3" data-resy>Reserve a Seat</a>
-      <p class="shero__meta reveal d4">One seating at seven · a single tasting menu</p>
+      <a href="#reserve" class="gbtn gbtn--solid reveal d3" data-resy>Reserve a Seat</a>
+      <p class="shero__meta reveal d4">One seating at seven · a single tasting · by reservation</p>
     </div>
-    <a href="#evening" class="shero__scroll" aria-label="Scroll"><span></span></a>
+    <a href="#reserve" class="shero__scroll" aria-label="Reservations"><span></span></a>
   </section>
 
-  <!-- ============ THE EVENING ============ -->
-  <section class="evening sectn" id="evening">
-    <div class="center">
-      <span class="label reveal">The Evening</span>
-      <h2 class="display reveal d1">The other half<br>of the <em>house</em></h2>
-      <div class="hairrule reveal d1"></div>
-      <p class="reveal d2">
-        When the daytime counter goes quiet, the room is transformed. Candlelight
-        and low vinyl, pressed linen, and a single seating for those in the know —
-        the considered, unhurried other half of Bob &amp; Barb's, entirely by reservation.
-      </p>
-      <p class="reveal d2">
-        There is no menu to order from. The chef composes a seven-course tasting
-        each evening from Gulf oysters, Delta catfish, dry-aged beef and whatever
-        the season offers — Mississippi cooking, quietly elevated, and met glass for
-        glass from a reserve cellar.
-      </p>
-      <p class="reveal d3">
-        No rush. No spectacle. Just an evening set aside for the table in front of you.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============ PHOTO BAND ============ -->
-  <div class="band reveal">
-    <div class="band__img" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80&auto=format&fit=crop')"></div>
-    <p class="band__cap">Composed nightly by the chef</p>
-  </div>
-
-  <!-- ============ THE TABLE ============ -->
-  <section class="table sectn" id="table">
-    <div class="table__head">
-      <span class="label reveal">The Table</span>
-      <h2 class="display reveal d1">The Seven-Course <em>Tasting</em></h2>
-      <p class="reveal d1">One progression, served to the whole table, changing with the season.</p>
-    </div>
-
-    <div class="tasting" id="tasting"><!-- JS builds the courses --></div>
-
-    <div class="tasting__price reveal">
-      <span class="amt">$145</span>
-      <span class="per">Per guest · with cellar pairing $245 · chef's counter by request</span>
-    </div>
-
-    <div class="cellar">
-      <p class="cellar__title reveal">From the Cellar</p>
-      <div class="cellar__grid" id="cellar"><!-- JS --></div>
-    </div>
-  </section>
-
-  <!-- ============ PHOTO BAND ============ -->
-  <div class="band reveal">
-    <div class="band__img" style="background-image:url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=1600&q=80&auto=format&fit=crop')"></div>
-    <p class="band__cap">From the reserve cellar</p>
-  </div>
-
-  <!-- ============ RESERVE ============ -->
+  <!-- ============ RESERVE (up front) ============ -->
   <section class="reserve sectn" id="reserve">
     <div class="reserve__head">
       <span class="label reveal">Reservations</span>
-      <h2 class="display reveal d1">Choose an <em>evening</em></h2>
-      <p class="reveal d1">Seats are released by the month and tend to go quickly. Select an open night to see what remains.</p>
+      <h2 class="display reveal d1">Reserve an <em>evening</em></h2>
+      <div class="flourish reveal d1"><span aria-hidden="true">✦</span></div>
+      <p class="reveal d1">One seating, a single table. Seats are released by the month and tend to go within the hour — choose an open night to see what remains.</p>
     </div>
 
     <div class="reserve__grid">
@@ -145,25 +90,47 @@
     </div>
   </section>
 
-  <!-- ============ PRIVATE DINING ============ -->
+  <!-- ============ THE TABLE (the evening + the tasting) ============ -->
+  <section class="table sectn" id="table">
+    <div class="table__head">
+      <span class="label reveal">The Table</span>
+      <h2 class="display reveal d1">A private table,<br><em>after dark</em></h2>
+      <div class="flourish reveal d1"><span aria-hidden="true">✦</span></div>
+      <p class="reveal d1">
+        When the daytime counter goes quiet, the room is transformed — candlelight,
+        low vinyl, pressed linen, and Mississippi cooking quietly elevated. There is
+        no menu to order from. The chef composes seven courses, met glass for glass
+        from a reserve cellar.
+      </p>
+    </div>
+
+    <div class="tasting" id="tasting"><!-- JS builds the courses --></div>
+
+    <div class="tasting__price reveal">
+      <span class="amt">$145</span>
+      <span class="per">Per guest · with cellar pairing $245 · chef's counter by request</span>
+    </div>
+
+    <div class="cellar">
+      <p class="cellar__title reveal">From the Cellar</p>
+      <div class="cellar__grid" id="cellar"><!-- JS --></div>
+    </div>
+  </section>
+
+  <!-- ============ PRIVATE DINING (brief) ============ -->
   <section class="private sectn" id="private">
     <div class="center">
       <span class="label reveal">By Invitation</span>
       <h2 class="display reveal d1">The <em>Cellar Room</em></h2>
-      <div class="hairrule reveal d1"></div>
+      <div class="flourish reveal d1"><span aria-hidden="true">✦</span></div>
       <p class="reveal d2">
-        For those who prefer the evening to themselves — a discreet private room,
-        full buyouts on select nights, and bespoke menus composed with the chef.
+        For those who prefer the evening to themselves — a discreet room for up to
+        twelve, full buyouts on select nights, and a bespoke menu composed with the
+        chef, poured from the reserve list and seen to by a dedicated captain.
       </p>
-      <ul class="private__list reveal d2">
-        <li>The Cellar Room · seats up to twelve</li>
-        <li>Full buyouts &amp; bespoke tasting menus</li>
-        <li>Sommelier pairings from the reserve list</li>
-        <li>A dedicated captain · valet on request</li>
-      </ul>
-      <div class="private__cta reveal d3">
+      <div class="private__cta reveal d2">
         <a href="mailto:howdy@bobandbarbs.com?subject=Private%20Dining%20Inquiry" class="gbtn gbtn--solid">Inquire Privately</a>
-        <a href="#reserve" class="gbtn" data-resy>Reservations</a>
+        <a href="#reserve" class="gbtn">View the Calendar</a>
       </div>
     </div>
   </section>
@@ -184,16 +151,15 @@
       <a href="mailto:howdy@bobandbarbs.com">howdy@bobandbarbs.com</a>
     </p>
     <nav class="sfooter__links" aria-label="Footer">
-      <a href="#evening">The Evening</a>
-      <a href="#table">The Table</a>
       <a href="#reserve">Reserve</a>
+      <a href="#table">The Table</a>
       <a href="#private">Private Dining</a>
       <a href="index.html">The Pit</a>
     </nav>
     <p class="sfooter__legal">© <span id="year"></span> Bob &amp; Barb's Supper Club</p>
   </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite" style="font-family:var(--sans);border-color:var(--gold-dim);background:var(--espresso);color:var(--ivory)"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" style="font-family:var(--sans);color:var(--ivory);background:var(--espresso)"></div>
 
   <script src="js/links.js" defer></script>
   <script src="js/supper.js" defer></script>

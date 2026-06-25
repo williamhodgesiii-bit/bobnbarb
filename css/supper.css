@@ -6,18 +6,21 @@
    ========================================================= */
 
 :root {
-  --black:   #0a0908;
-  --night:   #100d0a;   /* section base        */
-  --night-2: #15110c;   /* alt section         */
-  --espresso:#1c1711;
-  --gold:    #e3c987;   /* champagne gold      */
-  --gold-dk: #c1a05c;
-  --gold-dim:#8f7c52;
-  --ivory:   #f3ece0;
-  --ivory-2: #d8cfbf;
-  --muted:   #9a8f7c;
-  --hair:    rgba(227,201,135,0.26);  /* gold hairline */
-  --hair-soft: rgba(227,201,135,0.14);
+  --black:   #0e0a07;   /* warm near-black     */
+  --night:   #150e09;   /* tobacco section     */
+  --night-2: #1b120c;   /* leather espresso    */
+  --espresso:#241710;
+  --gold:    #e0bd7a;   /* whiskey / brass     */
+  --gold-dk: #b88f4e;
+  --gold-dim:#8a6c44;
+  --leather: #7a2f23;   /* oxblood / saddle    */
+  --leather-2:#5a2018;
+  --ivory:   #f2e8d6;   /* warm ivory          */
+  --ivory-2: #d6c6ab;
+  --muted:   #9c8a6f;
+  --amber:   rgba(232,165,84,0.5);    /* candlelight     */
+  --hair:    rgba(224,189,122,0.30);  /* brass hairline  */
+  --hair-soft: rgba(224,189,122,0.14);
 
   --maxw: 1100px;
   --read: 660px;
@@ -59,6 +62,11 @@ body.supper::after {
 .center p { color: var(--ivory-2); font-size: 1.18rem; }
 .hairrule { width: 1px; height: clamp(40px, 7vw, 72px); background: linear-gradient(var(--gold), transparent); margin: 1.6rem auto; }
 .divider { width: 64px; height: 1px; background: var(--gold-dim); margin: 1.5rem auto; }
+/* a small western-refined flourish — brass rules with a centered star */
+.flourish { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1.5rem auto; }
+.flourish::before, .flourish::after { content: ''; width: clamp(40px, 9vw, 80px); height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim)); }
+.flourish::after { background: linear-gradient(90deg, var(--gold-dim), transparent); }
+.flourish span { color: var(--gold); font-size: 0.8rem; letter-spacing: 0.3em; }
 
 /* gold outline button */
 .gbtn {
@@ -111,21 +119,23 @@ body.supper::after {
    HERO — full-bleed, candlelit, still
    ========================================================= */
 .shero {
-  position: relative; min-height: 100svh; display: grid; place-items: center; text-align: center;
+  position: relative; min-height: 94svh; display: grid; place-items: center; text-align: center;
   padding: 7rem 1.5rem 5rem; overflow: hidden;
+  background: radial-gradient(120% 100% at 50% 8%, #2a1a10 0%, #160e09 52%, #0c0805 100%);
 }
 .shero__photo {
   position: absolute; inset: 0; z-index: 0;
-  background: #000 url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
-  opacity: 0.55;
+  background: #160f0a url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+  opacity: 0.5; filter: saturate(1.1) sepia(0.2) brightness(0.92);
   animation: slowzoom 26s ease-out forwards;
 }
 @keyframes slowzoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 .shero__veil {
   position: absolute; inset: 0; z-index: 1;
   background:
-    radial-gradient(120% 90% at 50% 30%, transparent 30%, rgba(8,6,4,0.7) 100%),
-    linear-gradient(0deg, rgba(8,6,4,0.95) 0%, rgba(8,6,4,0.25) 45%, rgba(8,6,4,0.7) 100%);
+    radial-gradient(60% 50% at 50% 78%, rgba(232,165,84,0.22), transparent 70%),
+    radial-gradient(120% 95% at 50% 28%, transparent 26%, rgba(12,8,5,0.72) 100%),
+    linear-gradient(0deg, rgba(12,8,5,0.95) 0%, rgba(14,9,6,0.2) 46%, rgba(12,8,5,0.62) 100%);
 }
 .shero__inner { position: relative; z-index: 2; max-width: 760px; }
 .shero__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(3rem, 9vw, 6rem); line-height: 0.95; color: var(--ivory); }
@@ -157,7 +167,9 @@ body.supper::after {
 /* =========================================================
    THE TABLE — the tasting menu
    ========================================================= */
-.table { background: var(--night-2); }
+.table { background:
+  radial-gradient(80% 60% at 50% 0%, rgba(232,165,84,0.07), transparent 60%),
+  var(--night-2); }
 .table__head { text-align: center; max-width: var(--read); margin: 0 auto clamp(3rem, 6vw, 4.5rem); }
 .table__head .label { display: block; margin-bottom: 1.2rem; }
 .table__head p { color: var(--ivory-2); font-size: 1.12rem; margin-top: 1rem; }
@@ -188,7 +200,9 @@ body.supper::after {
 /* =========================================================
    RESERVE — availability calendar (dark & gold)
    ========================================================= */
-.reserve { background: var(--night); }
+.reserve { background:
+  radial-gradient(75% 55% at 50% 0%, rgba(232,165,84,0.08), transparent 58%),
+  var(--night); }
 .reserve__head { text-align: center; max-width: var(--read); margin: 0 auto clamp(2.6rem, 5vw, 4rem); }
 .reserve__head .label { display: block; margin-bottom: 1.2rem; }
 .reserve__head p { color: var(--ivory-2); font-size: 1.1rem; margin-top: 1rem; }
@@ -237,7 +251,9 @@ body.supper::after {
 /* =========================================================
    PRIVATE — the cellar room
    ========================================================= */
-.private { background: var(--night-2); }
+.private { background:
+  radial-gradient(70% 60% at 50% 100%, rgba(122,47,35,0.16), transparent 62%),
+  var(--night-2); }
 .private .center p { margin-bottom: 1.6rem; }
 .private__list { list-style: none; max-width: 540px; margin: 2rem auto 0; }
 .private__list li { font-family: var(--serif); font-size: 1.2rem; color: var(--ivory-2); padding: 0.9rem 0; border-bottom: 1px solid var(--hair-soft); }
