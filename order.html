@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Pickup — Bob &amp; Barb's Q'n 2 · Tupelo, MS</title>
+  <meta name="description" content="Order Bob & Barb's barbecue and smash burgers for pickup & curbside in downtown Tupelo. Build a quick tray or call it in at 662-801-5181." />
+  <meta name="theme-color" content="#17120d" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Yellowtail&family=Courier+Prime:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/pit.css" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+</head>
+<body class="pit">
+  <a href="#tray" class="skip">Skip to the order builder</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav stuck" id="nav">
+    <a href="index.html" class="brand" aria-label="Bob and Barb's, home">
+      <span class="brand__script">Bob &amp; Barb's</span>
+      <span class="brand__sub">Q'n 2 · Tupelo</span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="index.html#story">Story</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#catering">Catering</a>
+      <a href="index.html#visit">Visit</a>
+      <a href="order.html" class="nav__order is-current" aria-current="page">Order</a>
+      <a href="supper-club.html" class="nav__supper">Supper Club <span aria-hidden="true">↗</span></a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============ ORDER HERO ============ -->
+  <section class="order-hero">
+    <p class="eyebrow">Pickup &amp; Curbside · Downtown Tupelo</p>
+    <h1>Order the Pit</h1>
+    <p>Build a quick tray below, or call it straight in. We'll have it hot and
+      ready at the counter — don't be afraid of flavor.</p>
+  </section>
+
+  <!-- ============ ORDER MAIN ============ -->
+  <main class="order-main section">
+    <div class="order-grid">
+      <!-- how to order -->
+      <div class="howto">
+        <h2>How it works</h2>
+        <ol class="howto__steps">
+          <li>
+            <b>1</b>
+            <div>
+              <h4>Build your tray</h4>
+              <p>Tap the crowd-pleasers, or browse the <a href="index.html#menu">full menu</a> first.</p>
+            </div>
+          </li>
+          <li>
+            <b>2</b>
+            <div>
+              <h4>Send it our way</h4>
+              <p>Check out online through Toast, or call it in to the counter.</p>
+            </div>
+          </li>
+          <li>
+            <b>3</b>
+            <div>
+              <h4>Pick it up hot</h4>
+              <p>Roll up to the downtown counter or curbside. We'll bring it out.</p>
+            </div>
+          </li>
+        </ol>
+        <p class="howto__call">
+          Or just call:<br />
+          <a href="tel:+16628015181">662-801-5181</a>
+        </p>
+      </div>
+
+      <!-- the quick tray -->
+      <div class="tray" id="tray">
+        <h3 class="tray__title">Quick Tray</h3>
+        <p class="tray__sub">A few favorites to get you started.</p>
+        <div class="tray__items" id="trayItems"><!-- JS --></div>
+        <div class="tray__sum">
+          <div class="tray__sum-row"><span>Your tray</span><span id="trayCount">0 items</span></div>
+          <div class="tray__total"><span>Subtotal</span><span id="trayTotal">$0.00</span></div>
+          <a href="#" class="btn btn--ember btn--block btn--lg" id="traySend">Send to the Kitchen</a>
+          <p class="tray__fine">
+            Online checkout runs through <strong>Toast</strong>. Drop your link in
+            <code>js/links.js</code> to go live; until then we'll point folks to the phone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="footer__script">Bob &amp; Barb's</span>
+        <p>
+          Q'n 2 · Barbecue &amp; Smash Burgers<br />
+          Downtown Tupelo, Mississippi<br />
+          <a href="tel:+16628015181">662-801-5181</a>
+        </p>
+      </div>
+      <div class="footer__brand">
+        <p style="margin-top:0">
+          <strong style="color:var(--cream)">Pickup hours</strong><br />
+          Wed–Fri 11a–7p · Sat 11a–5p<br />
+          Sun–Tue — restin' the fire
+        </p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="index.html#menu">Menu</a>
+        <a href="index.html#catering">Catering</a>
+        <a href="supper-club.html">Supper Club</a>
+        <a href="index.html#visit">Visit</a>
+      </nav>
+    </div>
+    <p class="footer__legal">
+      © <span id="year"></span> Bob &amp; Barb's Q'n 2 · Don't be afraid of flavor · Made with smoke in Tupelo.
+    </p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/links.js" defer></script>
+  <script src="js/order.js" defer></script>
+</body>
+</html>

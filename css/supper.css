@@ -1,0 +1,302 @@
+/* =========================================================
+   THE SUPPER CLUB  ·  Bob & Barb's after dark
+   A different establishment entirely: hushed, candlelit,
+   editorial. Near-black, champagne gold, ivory. Serif.
+   Nothing here should feel like the daytime Pit.
+   ========================================================= */
+
+:root {
+  --black:   #0a0908;
+  --night:   #100d0a;   /* section base        */
+  --night-2: #15110c;   /* alt section         */
+  --espresso:#1c1711;
+  --gold:    #e3c987;   /* champagne gold      */
+  --gold-dk: #c1a05c;
+  --gold-dim:#8f7c52;
+  --ivory:   #f3ece0;
+  --ivory-2: #d8cfbf;
+  --muted:   #9a8f7c;
+  --hair:    rgba(227,201,135,0.26);  /* gold hairline */
+  --hair-soft: rgba(227,201,135,0.14);
+
+  --maxw: 1100px;
+  --read: 660px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:  'Jost', system-ui, sans-serif;   /* tracked labels */
+  --body:  'Inter', system-ui, sans-serif;  /* fine print     */
+}
+
+body.supper {
+  font-family: var(--serif);
+  background: var(--black);
+  color: var(--ivory);
+  line-height: 1.7;
+  letter-spacing: 0.005em;
+}
+body.supper .grain { mix-blend-mode: screen; opacity: 0.035; }
+::selection { background: var(--gold); color: #14110b; }
+
+/* a soft vignette to frame the rooms */
+body.supper::after {
+  content: ''; position: fixed; inset: 0; z-index: 8000; pointer-events: none;
+  background: radial-gradient(130% 100% at 50% 0%, transparent 66%, rgba(0,0,0,0.5) 100%);
+}
+
+/* ---------- shared editorial bits ---------- */
+.label {
+  font-family: var(--sans); font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.42em; font-size: 0.66rem; color: var(--gold);
+}
+.display {
+  font-weight: 500; font-style: normal; letter-spacing: 0.005em; line-height: 1.04;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+}
+.display em { font-style: italic; color: var(--gold); }
+.sectn { padding: clamp(5rem, 11vw, 9rem) clamp(1.4rem, 6vw, 3rem); position: relative; }
+.center { max-width: var(--read); margin: 0 auto; text-align: center; }
+.center p { color: var(--ivory-2); font-size: 1.18rem; }
+.hairrule { width: 1px; height: clamp(40px, 7vw, 72px); background: linear-gradient(var(--gold), transparent); margin: 1.6rem auto; }
+.divider { width: 64px; height: 1px; background: var(--gold-dim); margin: 1.5rem auto; }
+
+/* gold outline button */
+.gbtn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.26em; font-size: 0.72rem;
+  color: var(--gold); border: 1px solid var(--gold-dim); background: transparent;
+  padding: 1.05rem 2.1rem; cursor: pointer; transition: background 0.4s var(--ease), color 0.4s, border-color 0.4s, transform 0.4s;
+}
+.gbtn:hover { background: var(--gold); color: #14110b; border-color: var(--gold); transform: translateY(-2px); }
+.gbtn--solid { background: var(--gold); color: #14110b; border-color: var(--gold); }
+.gbtn--solid:hover { background: var(--gold-dk); border-color: var(--gold-dk); }
+.gbtn--block { width: 100%; justify-content: center; }
+
+/* =========================================================
+   NAV — minimal, centered brand
+   ========================================================= */
+.snav {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 1.5rem clamp(1.4rem, 6vw, 3rem);
+  transition: background 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.5s;
+  border-bottom: 1px solid transparent;
+}
+.snav.stuck {
+  background: color-mix(in srgb, var(--black) 88%, transparent);
+  backdrop-filter: blur(12px); border-bottom-color: var(--hair-soft);
+  padding-top: 0.9rem; padding-bottom: 0.9rem;
+}
+.snav__links { display: flex; gap: 2rem; }
+.snav__links--right { justify-content: flex-end; }
+.snav__links a {
+  font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.68rem;
+  color: var(--ivory-2); position: relative; padding: 0.3rem 0; transition: color 0.3s;
+}
+.snav__links a:hover { color: var(--gold); }
+.snav__pit { color: var(--gold) !important; display: inline-flex; gap: 0.3rem; }
+.snav__right { display: flex; align-items: center; gap: 1.2rem; justify-self: end; }
+.snav__reserve { padding: 0.7rem 1.4rem; letter-spacing: 0.22em; }
+.sbrand { text-align: center; line-height: 1; }
+.sbrand__name { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--ivory); }
+.sbrand__sub { display: block; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.46em; font-size: 0.54rem; color: var(--gold); margin-top: 0.35rem; padding-left: 0.46em; }
+
+.sburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; justify-self: end; }
+.sburger span { width: 24px; height: 1px; background: var(--ivory); transition: 0.35s var(--ease); }
+.sburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.sburger.open span:nth-child(2) { opacity: 0; }
+.sburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* =========================================================
+   HERO — full-bleed, candlelit, still
+   ========================================================= */
+.shero {
+  position: relative; min-height: 100svh; display: grid; place-items: center; text-align: center;
+  padding: 7rem 1.5rem 5rem; overflow: hidden;
+}
+.shero__photo {
+  position: absolute; inset: 0; z-index: 0;
+  background: #000 url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+  opacity: 0.55;
+  animation: slowzoom 26s ease-out forwards;
+}
+@keyframes slowzoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+.shero__veil {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(120% 90% at 50% 30%, transparent 30%, rgba(8,6,4,0.7) 100%),
+    linear-gradient(0deg, rgba(8,6,4,0.95) 0%, rgba(8,6,4,0.25) 45%, rgba(8,6,4,0.7) 100%);
+}
+.shero__inner { position: relative; z-index: 2; max-width: 760px; }
+.shero__name { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(3rem, 9vw, 6rem); line-height: 0.95; color: var(--ivory); }
+.shero__sub { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.5em; font-size: clamp(0.7rem, 1.6vw, 0.92rem); color: var(--gold); margin-top: 1.1rem; padding-left: 0.5em; }
+.shero__tag { font-size: clamp(1.2rem, 2.6vw, 1.7rem); font-style: italic; color: var(--ivory-2); margin: 2rem auto 2.4rem; max-width: 30ch; }
+.shero__meta { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.28em; font-size: 0.66rem; color: var(--muted); margin-top: 2.4rem; }
+.shero__scroll { position: absolute; bottom: 1.8rem; left: 50%; transform: translateX(-50%); z-index: 2; }
+.shero__scroll span { display: block; width: 1px; height: 54px; margin: 0 auto; background: linear-gradient(var(--gold), transparent); animation: pulse 2.4s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 0.25; transform: scaleY(0.6); } 50% { opacity: 1; transform: scaleY(1); } }
+
+/* =========================================================
+   THE EVENING — editorial story
+   ========================================================= */
+.evening { background: var(--night); }
+.evening .label { display: block; margin-bottom: 1.4rem; }
+.evening h2 { margin-bottom: 1.6rem; }
+.evening p { margin-bottom: 1.3rem; }
+.evening p:last-child { margin-bottom: 0; }
+
+/* full-bleed photo band between chapters */
+.band { position: relative; height: clamp(320px, 56vw, 620px); overflow: hidden; }
+.band__img { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.02); }
+.band::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(8,6,4,0.6), transparent 40%, rgba(8,6,4,0.4)); }
+.band__cap {
+  position: absolute; left: 50%; bottom: clamp(1.4rem, 4vw, 3rem); transform: translateX(-50%); z-index: 1;
+  font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.36em; font-size: 0.64rem; color: var(--ivory);
+}
+
+/* =========================================================
+   THE TABLE — the tasting menu
+   ========================================================= */
+.table { background: var(--night-2); }
+.table__head { text-align: center; max-width: var(--read); margin: 0 auto clamp(3rem, 6vw, 4.5rem); }
+.table__head .label { display: block; margin-bottom: 1.2rem; }
+.table__head p { color: var(--ivory-2); font-size: 1.12rem; margin-top: 1rem; }
+
+.tasting { max-width: 720px; margin: 0 auto; }
+.course {
+  display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: baseline;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--hair-soft);
+}
+.course:last-child { border-bottom: 0; }
+.course__num { font-family: var(--serif); font-style: italic; font-size: 1.4rem; color: var(--gold); min-width: 2.4ch; }
+.course__name { font-family: var(--serif); font-size: 1.5rem; color: var(--ivory); }
+.course__desc { font-family: var(--body); font-size: 0.9rem; color: var(--muted); letter-spacing: 0.01em; margin-top: 0.3rem; line-height: 1.6; }
+
+.tasting__price { text-align: center; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.tasting__price .amt { font-family: var(--serif); font-style: italic; font-size: 2rem; color: var(--gold); }
+.tasting__price .per { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.28em; font-size: 0.64rem; color: var(--muted); display: block; margin-top: 0.5rem; }
+
+/* the cellar — a quiet supporting list */
+.cellar { max-width: 720px; margin: clamp(3.5rem, 7vw, 5rem) auto 0; }
+.cellar__title { text-align: center; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.32em; font-size: 0.72rem; color: var(--gold); margin-bottom: 2rem; }
+.cellar__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 3rem; }
+.cellar__item { border-top: 1px solid var(--hair-soft); padding-top: 1rem; }
+.cellar__item h4 { font-family: var(--serif); font-size: 1.25rem; color: var(--ivory); font-weight: 500; }
+.cellar__item h4 span { float: right; font-style: italic; color: var(--gold); font-size: 1.05rem; }
+.cellar__item p { font-family: var(--body); font-size: 0.86rem; color: var(--muted); margin-top: 0.25rem; }
+
+/* =========================================================
+   RESERVE — availability calendar (dark & gold)
+   ========================================================= */
+.reserve { background: var(--night); }
+.reserve__head { text-align: center; max-width: var(--read); margin: 0 auto clamp(2.6rem, 5vw, 4rem); }
+.reserve__head .label { display: block; margin-bottom: 1.2rem; }
+.reserve__head p { color: var(--ivory-2); font-size: 1.1rem; margin-top: 1rem; }
+.reserve__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; max-width: 940px; margin: 0 auto; }
+
+.cal { border: 1px solid var(--hair-soft); padding: 1.6rem; background: rgba(255,255,255,0.012); }
+.cal__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.3rem; }
+.cal__month { font-family: var(--serif); font-style: italic; font-size: 1.4rem; color: var(--ivory); }
+.cal__head button { width: 38px; height: 38px; border: 1px solid var(--hair-soft); background: transparent; color: var(--gold); font-size: 1.1rem; cursor: pointer; transition: 0.25s; }
+.cal__head button:hover:not(:disabled) { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 12%, transparent); }
+.cal__head button:disabled { opacity: 0.25; cursor: default; }
+.cal__dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 8px; }
+.cal__dow span { text-align: center; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.58rem; color: var(--muted); }
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-cell { aspect-ratio: 1; display: grid; place-items: center; font-family: var(--sans); font-size: 0.82rem; color: var(--muted); position: relative; }
+.cal-cell--empty { visibility: hidden; }
+.cal-cell--past { opacity: 0.28; }
+.cal-cell--event { cursor: pointer; color: var(--ivory); border: 1px solid var(--hair); transition: 0.25s var(--ease); }
+.cal-cell--event:hover { border-color: var(--gold); background: color-mix(in srgb, var(--gold) 10%, transparent); }
+.cal-cell__dot { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; }
+.cal-cell--event.open .cal-cell__dot { background: var(--gold); }
+.cal-cell--event.few .cal-cell__dot  { background: #d98a4a; }
+.cal-cell--event.full { opacity: 0.4; }
+.cal-cell--event.full .cal-cell__dot { background: var(--muted); }
+.cal-cell--event.sel { background: var(--gold); color: #14110b; border-color: var(--gold); }
+.cal-cell--event.sel .cal-cell__dot { background: #14110b; }
+.cal__legend { display: flex; gap: 1.3rem; flex-wrap: wrap; margin-top: 1.3rem; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.58rem; color: var(--muted); }
+.cal__legend i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.cal__legend .open { background: var(--gold); } .cal__legend .few { background: #d98a4a; } .cal__legend .full { background: var(--muted); }
+
+.detail { border: 1px solid var(--hair-soft); padding: clamp(1.6rem, 3vw, 2.4rem); position: sticky; top: 100px; background: rgba(255,255,255,0.012); }
+.detail__dow { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.66rem; color: var(--gold); }
+.detail__d { font-family: var(--serif); font-size: 3.4rem; line-height: 1; color: var(--ivory); }
+.detail__mo { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.68rem; color: var(--muted); }
+.detail__title { font-family: var(--serif); font-style: italic; font-size: 1.7rem; color: var(--ivory); margin-top: 0.8rem; }
+.detail__sub { color: var(--muted); font-family: var(--body); font-size: 0.9rem; margin: 0.4rem 0 1.2rem; }
+.detail__status { display: inline-block; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.6rem; padding: 0.3rem 0.8rem; border: 1px solid var(--hair); color: var(--gold); margin-bottom: 1.3rem; }
+.detail__status.full { color: var(--muted); border-color: var(--hair-soft); }
+.detail__seats { margin-bottom: 1.4rem; }
+.detail__bar { height: 2px; background: var(--hair-soft); overflow: hidden; }
+.detail__bar span { display: block; height: 100%; background: var(--gold); transition: width 0.6s var(--ease); }
+.detail__seats-label { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.64rem; color: var(--muted); margin-top: 0.6rem; }
+.detail__note { font-family: var(--body); font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 0.9rem; }
+.detail__empty { color: var(--muted); text-align: center; font-style: italic; padding: 3rem 1rem; }
+
+/* =========================================================
+   PRIVATE — the cellar room
+   ========================================================= */
+.private { background: var(--night-2); }
+.private .center p { margin-bottom: 1.6rem; }
+.private__list { list-style: none; max-width: 540px; margin: 2rem auto 0; }
+.private__list li { font-family: var(--serif); font-size: 1.2rem; color: var(--ivory-2); padding: 0.9rem 0; border-bottom: 1px solid var(--hair-soft); }
+.private__list li:last-child { border-bottom: 0; }
+.private__cta { margin-top: 2.4rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* =========================================================
+   BACK TO THE PIT — quiet bridge
+   ========================================================= */
+.topit { background: var(--black); text-align: center; padding: clamp(4rem, 8vw, 6rem) 1.5rem; border-top: 1px solid var(--hair-soft); }
+.topit .label { display: block; margin-bottom: 1rem; color: var(--gold-dim); }
+.topit p { font-family: var(--serif); font-style: italic; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--ivory-2); margin-bottom: 1.6rem; }
+.topit a { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.72rem; color: var(--gold); border-bottom: 1px solid var(--gold-dim); padding-bottom: 4px; transition: color 0.3s, border-color 0.3s; }
+.topit a:hover { color: var(--ivory); border-color: var(--ivory); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.sfooter { background: var(--black); color: var(--ivory-2); padding: clamp(3rem, 6vw, 4.5rem) 1.5rem 2.5rem; text-align: center; border-top: 1px solid var(--hair-soft); }
+.sfooter__name { font-family: var(--serif); font-style: italic; font-size: 2rem; color: var(--ivory); }
+.sfooter__sub { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.4em; font-size: 0.56rem; color: var(--gold); margin: 0.6rem 0 1.6rem; }
+.sfooter__row { font-family: var(--body); font-size: 0.9rem; color: var(--muted); line-height: 2; }
+.sfooter__row a { color: var(--gold); }
+.sfooter__links { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; margin: 1.4rem 0; }
+.sfooter__links a { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.64rem; color: var(--ivory-2); }
+.sfooter__links a:hover { color: var(--gold); }
+.sfooter__legal { font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.58rem; color: var(--gold-dim); margin-top: 1.6rem; }
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+.toast {
+  position: fixed; left: 50%; bottom: 1.6rem; transform: translate(-50%, 160%); z-index: 1100;
+  padding: 0.95rem 1.5rem; border: 1px solid var(--gold-dim);
+  text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.72rem;
+  box-shadow: 0 30px 60px -24px rgba(0,0,0,0.8); transition: transform 0.45s var(--ease);
+  max-width: min(92vw, 480px); text-align: center;
+}
+.toast.show { transform: translate(-50%, 0); }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 860px) {
+  .reserve__grid { grid-template-columns: 1fr; }
+  .detail { position: static; }
+  .cellar__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .snav { grid-template-columns: auto 1fr auto; }
+  .snav__links { position: fixed; inset: 0 0 0 auto; width: min(82vw, 320px); background: var(--espresso);
+    flex-direction: column; justify-content: center; align-items: flex-start; padding: 2.6rem; gap: 1.8rem;
+    transform: translateX(102%); transition: transform 0.45s var(--ease); z-index: 105; border-left: 1px solid var(--hair-soft); }
+  .snav__links.open { transform: translateX(0); }
+  .snav__links--left { order: 3; }
+  .snav__links a { font-size: 0.82rem; }
+  .snav__reserve { display: none; }
+  .sburger { display: flex; }
+  .sbrand { justify-self: center; }
+  .course { grid-template-columns: 1fr; gap: 0.3rem; }
+  .course__num { font-size: 1.1rem; }
+}
