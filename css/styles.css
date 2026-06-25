@@ -29,6 +29,7 @@
   --accent:    var(--ember);
   --accent-2:  var(--oxblood);
   --hero-bg:   radial-gradient(120% 120% at 50% 0%, #3a241a 0%, #1c120d 55%, #120b07 100%);
+  --hero-fade: #140d08;   /* solid tail of the hero gradient — the photo melts into this */
 
   --radius:    14px;
   --radius-lg: 22px;
@@ -62,6 +63,7 @@ body.is-night {
   --accent:    var(--gold);
   --accent-2:  var(--gold-lo);
   --hero-bg:   radial-gradient(130% 120% at 50% -12%, #241a11 0%, #0f0a07 56%, #050302 100%);
+  --hero-fade: #060403;
   --shadow:    0 30px 72px -24px rgba(0, 0, 0, 0.88);
 }
 
@@ -332,6 +334,66 @@ body.is-night .mode-toggle__thumb::before { content: '☾'; }
 .hero__scroll-line { width: 1px; height: 46px; background: linear-gradient(var(--gold), transparent); animation: scrollpulse 2s ease-in-out infinite; }
 .hero__scroll-text { font-family: var(--font-script); font-size: 1.1rem; color: var(--gold); }
 @keyframes scrollpulse { 0%,100% { opacity: 0.3; transform: scaleY(0.6); } 50% { opacity: 1; transform: scaleY(1); } }
+
+/* ---------- HERO · THE BBQ PHOTO ----------
+   One element, two responsive personalities:
+   • Phones / tablets (base rules): a full-bleed, darkened backdrop so the
+     screen is never bland behind the centered headline.
+   • Desktop (≥1024px, below): it slides to the right, bleeds off the edge,
+     and its inner edge dissolves into the smoke while the copy moves into a
+     left-hand column. Embers + smoke drift over it either way.
+   It sits just above the gradient (z:0) and below the embers (z:1), smoke
+   (z:2) and words (z:3). Swap the <img src> to change the shot. */
+.hero__media {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden; pointer-events: none;
+}
+.hero__media-img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: var(--hero-media-pos, 50% 42%);
+  filter: saturate(1.06) contrast(1.02);
+  transform: scale(1.04);                 /* always covers, even mid-pan */
+  animation: heropan 30s ease-in-out infinite alternate;
+}
+@keyframes heropan { to { transform: scale(1.12); } }
+/* warm, dark scrim so the cream type stays legible over the food */
+.hero__media::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(15,10,7,0.76) 0%, rgba(15,10,7,0.50) 44%, rgba(15,10,7,0.84) 100%),
+    radial-gradient(140% 95% at 50% 40%, rgba(15,10,7,0.10) 0%, rgba(15,10,7,0.52) 100%);
+}
+/* candlelit hush for the photo when the Supper Club lights come up */
+body.is-night .hero__media-img { filter: saturate(0.82) brightness(0.66) contrast(1.04); }
+
+@media (min-width: 1024px) {
+  /* editorial split — words to the left, the pit bleeding off the right */
+  .hero { align-items: flex-start; }
+  .hero__inner {
+    text-align: left; max-width: min(34rem, 54%);
+    margin: 0 auto 0 clamp(1.5rem, 6vw, 5rem);
+  }
+  .hero__crest { margin: 0 0 1.4rem; }
+  .hero__title { align-items: flex-start; }
+  .hero__title-script { font-size: clamp(3rem, 6vw, 5.6rem); }
+  .hero__title-slab  { font-size: clamp(1.3rem, 2.8vw, 2.1rem); }
+  .hero__tag  { margin: 0 0 2rem; }
+  .hero__cta  { justify-content: flex-start; }
+  .hero__meta { justify-content: flex-start; }
+
+  .hero__media { left: auto; right: 0; width: clamp(42%, 46vw, 52%); }
+  .hero__media-img {
+    object-position: var(--hero-media-pos, 50% 50%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 20%, #000 54%);
+            mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 20%, #000 54%);
+  }
+  /* fade the inner edge into the exact gradient tail + a soft vignette */
+  .hero__media::after {
+    background:
+      linear-gradient(90deg, var(--hero-fade) 0%, rgba(18,11,7,0.5) 26%, transparent 60%),
+      radial-gradient(120% 84% at 80% 46%, transparent 44%, rgba(18,11,7,0.5) 100%);
+  }
+}
 
 /* ---------- MARQUEE ---------- */
 .marquee {
@@ -686,7 +748,7 @@ body.is-night .faq__item.is-open .faq__icon { color: #1a120a; }
 .reveal[data-delay="4"] { transition-delay: 0.32s; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .hero__smoke, .story__art-smoke, .marquee__track, .hero__scroll-line, .visit__map-pin { animation: none !important; }
+  .hero__smoke, .story__art-smoke, .marquee__track, .hero__scroll-line, .visit__map-pin, .hero__media-img { animation: none !important; }
 }
 
 /* ---------- RESPONSIVE ---------- */
