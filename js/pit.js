@@ -66,13 +66,23 @@
 
   const burger = $('#burger');
   const links = $('#navLinks');
+  const scrim = $('#navScrim');
   const toggle = (open) => {
     links.classList.toggle('open', open);
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
+    if (scrim) scrim.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
   };
   burger.addEventListener('click', () => toggle(!links.classList.contains('open')));
   $$('#navLinks a').forEach(a => a.addEventListener('click', () => toggle(false)));
+  if (scrim) scrim.addEventListener('click', () => toggle(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && links.classList.contains('open')) toggle(false);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760 && links.classList.contains('open')) toggle(false);
+  });
 
   /* ---------- MENU: render the printed sheet ---------- */
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

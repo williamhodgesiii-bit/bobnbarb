@@ -122,7 +122,9 @@ body.pit .grain { mix-blend-mode: multiply; }
 .nav__supper::after { display: none; }
 .nav__supper:hover { background: color-mix(in srgb, var(--mustard) 16%, transparent); }
 .nav__order { background: var(--brick); color: var(--cream) !important; padding: 0.55rem 1rem !important; border-radius: 3px; }
-.nav.stuck .nav__order { color: var(--cream) !important; }
+/* desktop only: ORDER is a brick button, so keep its text cream when stuck.
+   On mobile it's a plain list row, where this would turn it cream-on-cream. */
+@media (min-width: 761px) { .nav.stuck .nav__order { color: var(--cream) !important; } }
 .nav__order::after { display: none; }
 .nav__order:hover { background: var(--brick-dk); }
 
@@ -132,6 +134,15 @@ body.pit .grain { mix-blend-mode: multiply; }
 .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .burger.open span:nth-child(2) { opacity: 0; }
 .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* dimmed backdrop behind the open drawer — below the nav (z 100) so the bar &
+   burger stay live, above the page so a tap anywhere closes the menu */
+.nav__scrim {
+  position: fixed; inset: 0; z-index: 92; background: rgba(20, 12, 7, 0.45);
+  opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease);
+}
+.nav__scrim.open { opacity: 1; pointer-events: auto; }
+body.nav-open { overflow: hidden; }
 
 /* =========================================================
    HERO — photographic, asymmetric, confident

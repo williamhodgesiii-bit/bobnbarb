@@ -45,13 +45,23 @@
 
   const sburger = $('#sburger');
   const slinks = $('#snavLinks');
+  const sscrim = $('#snavScrim');
   const toggle = (open) => {
     slinks.classList.toggle('open', open);
     sburger.classList.toggle('open', open);
     sburger.setAttribute('aria-expanded', String(open));
+    if (sscrim) sscrim.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
   };
   sburger.addEventListener('click', () => toggle(!slinks.classList.contains('open')));
   $$('#snavLinks a').forEach(a => a.addEventListener('click', () => toggle(false)));
+  if (sscrim) sscrim.addEventListener('click', () => toggle(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && slinks.classList.contains('open')) toggle(false);
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 680 && slinks.classList.contains('open')) toggle(false);
+  });
 
   /* ---------- TASTING + CELLAR ---------- */
   $('#tasting').innerHTML = TASTING.map((c, i) => `

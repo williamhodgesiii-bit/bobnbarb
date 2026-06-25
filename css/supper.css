@@ -87,12 +87,20 @@ body.supper::after {
   position: fixed; inset: 0 0 auto 0; z-index: 100;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 1.5rem clamp(1.4rem, 6vw, 3rem);
-  transition: background 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.5s;
-  border-bottom: 1px solid transparent;
+  transition: padding 0.5s var(--ease);
 }
-.snav.stuck {
+/* The frosted bar lives on a pseudo-element. Putting backdrop-filter on .snav
+   itself would make it the containing block for the position:fixed mobile
+   drawer — collapsing the drawer to the nav's height once scrolled. */
+.snav::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: 0; transition: opacity 0.5s var(--ease);
   background: color-mix(in srgb, var(--black) 88%, transparent);
-  backdrop-filter: blur(12px); border-bottom-color: var(--hair-soft);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hair-soft);
+}
+.snav.stuck::before { opacity: 1; }
+.snav.stuck {
   padding-top: 0.9rem; padding-bottom: 0.9rem;
 }
 .snav__links { display: flex; gap: 2rem; }
@@ -109,7 +117,9 @@ body.supper::after {
 .sbrand__name { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--ivory); }
 .sbrand__sub { display: block; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.46em; font-size: 0.54rem; color: var(--gold); margin-top: 0.35rem; padding-left: 0.46em; }
 
-.sburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; justify-self: end; }
+/* z-index keeps the burger (which becomes an ✕) above the open drawer so it
+   stays tappable to close */
+.sburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; justify-self: end; position: relative; z-index: 110; }
 .sburger span { width: 24px; height: 1px; background: var(--ivory); transition: 0.35s var(--ease); }
 .sburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .sburger.open span:nth-child(2) { opacity: 0; }
@@ -319,6 +329,14 @@ body.supper::after {
   .course { grid-template-columns: 1fr; gap: 0.3rem; }
   .course__num { font-size: 1.1rem; }
 }
+/* dimmed backdrop behind the open drawer — sits below the nav (z 100) so the
+   nav bar and burger stay live, and over the page so a tap anywhere closes */
+.snav__scrim {
+  position: fixed; inset: 0; z-index: 92; background: rgba(0, 0, 0, 0.55);
+  opacity: 0; pointer-events: none; transition: opacity 0.4s var(--ease);
+}
+.snav__scrim.open { opacity: 1; pointer-events: auto; }
+body.nav-open { overflow: hidden; }
 @media (max-width: 640px) {
   /* compact, unhurried — but not endless on a phone */
   .sectn { padding: 3rem 1.4rem; }
