@@ -144,13 +144,15 @@ body.pit .grain { mix-blend-mode: multiply; }
     radial-gradient(120% 95% at 72% 18%, rgba(74,40,22,0.55) 0%, transparent 55%),
     linear-gradient(158deg, #311e13 0%, #20140d 48%, #160f09 100%);
 }
-.hero__photo {
-  position: absolute; inset: 0; z-index: 0;
-  background-image: url('assets/gallery/combo.jpg');
-  background-size: cover; background-position: center 42%;
-  transform: scale(1.04);
-  filter: saturate(1.15) contrast(1.05) brightness(0.95) sepia(0.12);
-  opacity: 0.92;
+/* the food, on the plate — full-bleed behind the words on phones, then
+   bleeding off the right on wider screens (see the min-width block below)
+   so the copy keeps a clean dark column. combo.jpg is the LCP image. */
+.hero__media {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+.hero__media-img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%;
+  transform: scale(1.04); filter: saturate(1.12) contrast(1.05);
 }
 /* warm ember + candlelight so the frame never reads as a black void */
 .hero__glow {
@@ -160,11 +162,12 @@ body.pit .grain { mix-blend-mode: multiply; }
     radial-gradient(52% 52% at 96% 92%, rgba(226,150,68,0.4), transparent 70%),
     radial-gradient(40% 38% at 64% 4%, rgba(202,138,44,0.22), transparent 70%);
 }
-.hero__veil {
-  position: absolute; inset: 0; z-index: 1;
+/* readability scrim — darker on phones, where the copy sits over the food */
+.hero__scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(24,14,8,0.92) 0%, rgba(28,17,10,0.6) 44%, rgba(40,23,13,0.12) 76%, rgba(20,12,7,0.34) 100%),
-    radial-gradient(125% 120% at 80% 55%, transparent 36%, rgba(14,8,4,0.5) 100%);
+    linear-gradient(180deg, rgba(13,8,4,0.76) 0%, rgba(13,8,4,0.5) 30%, rgba(13,8,4,0.58) 60%, rgba(10,6,3,0.86) 100%),
+    radial-gradient(135% 120% at 50% 28%, transparent 36%, rgba(9,5,2,0.58) 100%);
 }
 .hero__smoke {
   position: absolute; inset: -10%; z-index: 2; pointer-events: none; opacity: 0.7;
@@ -185,6 +188,24 @@ body.pit .grain { mix-blend-mode: multiply; }
 .hero__call { font-family: var(--mono); font-size: 0.95rem; letter-spacing: 0.02em; color: var(--cream); }
 .hero__call span { color: var(--mustard); text-transform: uppercase; letter-spacing: 0.16em; font-family: var(--cond); font-size: 0.72rem; display: block; margin-bottom: 0.2rem; }
 .hero__call a { border-bottom: 1px solid color-mix(in srgb, var(--mustard) 60%, transparent); }
+
+/* ≥ tablet — the food bleeds off the right edge, copy gets a dark column */
+@media (min-width: 761px) {
+  .hero { align-items: center; }
+  .hero__inner { max-width: min(38rem, 48vw); }
+  .hero__wordmark { white-space: nowrap; }
+  .hero__media { left: auto; right: 0; width: clamp(46%, 52vw, 58%); }
+  .hero__media-img {
+    object-position: 50% 50%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 24%, #000 56%);
+            mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 24%, #000 56%);
+  }
+  .hero__scrim {
+    background:
+      linear-gradient(90deg, #160f09 0%, rgba(22,15,9,0.5) 17%, rgba(22,15,9,0.06) 44%, transparent 62%),
+      radial-gradient(120% 130% at 88% 50%, transparent 56%, rgba(9,5,2,0.5) 100%);
+  }
+}
 
 /* hours strip just under the hero — like a joint's header board */
 .strip {
@@ -463,9 +484,13 @@ body.pit .grain { mix-blend-mode: multiply; }
   .nav__links a:last-child { border-bottom: none; }
   /* ORDER + SUPPER CLUB stay in the list (no boxes), set apart by colour */
   .nav__links .nav__order {
-    background: none; color: var(--brick) !important; font-weight: 700;
-    padding: 1.05rem 0 !important; border-radius: 0;
+    margin-top: 1.1rem; background: var(--ember); color: #fff !important;
+    font-weight: 700; text-align: center; letter-spacing: 0.14em;
+    border-radius: 4px; border-bottom: none !important;
+    padding: 0.95rem 1rem !important;
+    box-shadow: 0 10px 24px -12px rgba(212,82,31,0.8);
   }
+  .nav__links .nav__order::after { display: none; }
   .nav__links .nav__supper {
     color: var(--mustard) !important; border: none; border-radius: 0;
     padding: 1.05rem 0 !important; justify-content: flex-start; gap: 0.4rem;
@@ -473,7 +498,7 @@ body.pit .grain { mix-blend-mode: multiply; }
   .nav__links .nav__supper span { font-size: 0.82em; }
   .burger { display: flex; }
   .hero { align-items: flex-end; }
-  .hero__photo { background-position: center 30%; }
+  .hero__media-img { object-position: 50% 32%; }
 }
 @media (max-width: 640px) {
   /* tighter vertical rhythm so the page isn't a mile long */
